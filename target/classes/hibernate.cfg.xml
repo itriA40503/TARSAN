@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory>
+  <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+  <property name="hibernate.connection.password">123456</property>
+  <property name="hibernate.connection.url">jdbc:postgresql://ec2-52-193-77-171.ap-northeast-1.compute.amazonaws.com/tarsan_first</property>
+  <!--<property name="hibernate.connection.url">jdbc:postgresql://140.96.29.153/tarsan_test</property>-->
+  <property name="hibernate.connection.username">postgres</property>
+  <property name="hibernate.default_schema">public</property>
+  <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+  <!-- Enable Hibernate's automatic session context management -->
+  <property name="current_session_context_class">thread</property>
+  <!-- Reconnect while disconnecting -->
+  <property name="connection.autoReconnect">true</property>
+  <property name="connection.autoReconnectForPools">true</property>
+  <property name="connection.is-connection-validation-required">true</property>
+  
+  <!-- Hibernate DAOs class mapping-->
+  <mapping class="org.itri.ccma.tarsan.hibernate.Ad" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Ad2user" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Pattern" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Pattern2ad" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Userevent" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Users" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.PatternType" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.WebType" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.AdGroup" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Record" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Barcode" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.ReviewPattern" />
+  
+  <mapping class="org.itri.ccma.tarsan.hibernate.Adkeyword" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Budgetlog" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Runad" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Buyad2loc" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Buyad" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Exusergroup" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Location" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Price" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Logad" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Exuserlog" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Vacantad" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Budgetpool" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Denykeyword" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Exuser" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Postad" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Denydomain" />
+
+ </session-factory>
+</hibernate-configuration>

@@ -1,0 +1,6 @@
+# Disconnect all users
+
+SELECT pg_terminate_backend(pg_stat_activity.procpid)
+FROM pg_stat_activity
+WHERE pg_stat_activity.datname = 'tarsan_new'
+  AND procpid <> pg_backend_pid();

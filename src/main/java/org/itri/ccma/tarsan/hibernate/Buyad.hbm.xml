@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 01:28:50 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.Buyad" table="buyad" schema="public">
+        <id name="buyadId" type="long">
+            <column name="buyad_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="vacantad" class="org.itri.ccma.tarsan.hibernate.Vacantad" fetch="select">
+            <column name="vacant_id" />
+        </many-to-one>
+        <many-to-one name="exuser" class="org.itri.ccma.tarsan.hibernate.Exuser" fetch="select">
+            <column name="exuser_id" />
+        </many-to-one>
+        <property name="postadId" type="java.lang.Long">
+            <column name="postad_id" />
+        </property>
+        <property name="title" type="string">
+            <column name="title" length="128" />
+        </property>
+        <property name="type" type="string">
+            <column name="type" length="128" />
+        </property>
+        <property name="content" type="string">
+            <column name="content" length="65535" />
+        </property>
+        <property name="position" type="string">
+            <column name="position" length="128" />
+        </property>
+        <property name="size" type="string">
+            <column name="size" length="128" />
+        </property>
+        <property name="price" type="string">
+            <column name="price" length="128" />
+        </property>
+        <property name="startdate" type="timestamp">
+            <column name="startdate" length="29" />
+        </property>
+        <property name="enddate" type="timestamp">
+            <column name="enddate" length="29" />
+        </property>
+        <property name="intervaltime" type="string">
+            <column name="intervaltime" length="128" />
+        </property>
+        <property name="posted" type="java.lang.Boolean">
+            <column name="posted" />
+        </property>
+        <property name="createdate" type="timestamp">
+            <column name="createdate" length="29" not-null="true" />
+        </property>
+        <property name="updatetime" type="timestamp">
+            <column name="updatetime" length="29" />
+        </property>
+        <property name="del" type="java.lang.Boolean">
+            <column name="del" />
+        </property>
+        <set name="postads" table="postad" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="buyad_id" not-null="true" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Postad" />
+        </set>
+        <set name="budgetpools" table="budgetpool" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="buyad_id" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Budgetpool" />
+        </set>
+        <set name="buyad2locs" table="buyad2loc" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="buyad_id" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Buyad2loc" />
+        </set>
+        <set name="adkeywords" table="adkeyword" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="buyad_id" not-null="true" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Adkeyword" />
+        </set>
+    </class>
+</hibernate-mapping>

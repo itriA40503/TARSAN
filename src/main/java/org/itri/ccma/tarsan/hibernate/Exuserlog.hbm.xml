@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 01:28:50 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.Exuserlog" table="exuserlog" schema="public">
+        <id name="logId" type="long">
+            <column name="log_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="exuser" class="org.itri.ccma.tarsan.hibernate.Exuser" fetch="select">
+            <column name="exuser_id" not-null="true" />
+        </many-to-one>
+        <property name="ip" type="string">
+            <column name="ip" length="128" />
+        </property>
+        <property name="activity" type="string">
+            <column name="activity" length="128" />
+        </property>
+        <property name="createdate" type="timestamp">
+            <column name="createdate" length="29" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 01:28:50 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.Budgetpool" table="budgetpool" schema="public">
+        <id name="budgetId" type="long">
+            <column name="budget_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="buyad" class="org.itri.ccma.tarsan.hibernate.Buyad" fetch="select">
+            <column name="buyad_id" />
+        </many-to-one>
+        <property name="budgetNum" type="java.lang.Long">
+            <column name="budget_num" />
+        </property>
+        <property name="budgetUnit" type="string">
+            <column name="budget_unit" length="128" />
+        </property>
+        <property name="budgetCount" type="java.lang.Long">
+            <column name="budget_count" />
+        </property>
+        <property name="budgetTotal" type="java.lang.Long">
+            <column name="budget_total" />
+        </property>
+        <property name="createdate" type="timestamp">
+            <column name="createdate" length="29" />
+        </property>
+        <property name="updatetime" type="timestamp">
+            <column name="updatetime" length="29" />
+        </property>
+        <set name="budgetlogs" table="budgetlog" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="budget_id" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Budgetlog" />
+        </set>
+    </class>
+</hibernate-mapping>

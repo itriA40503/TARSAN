@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 3, 2015 11:03:17 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.Ad" table="ad" optimistic-lock="version">
+        <id name="adId" type="long">
+            <column name="ad_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="adGroup" type="java.lang.Long">
+            <column name="ad_group" />
+        </property>
+        <property name="keywords" type="string">
+            <column name="keywords" length="128" />
+        </property>
+        <property name="url" type="string">
+            <column name="url" length="2048" />
+        </property>
+        <property name="img" type="string">
+            <column name="img" length="2048" />
+        </property>
+        <property name="domain" type="string">
+            <column name="domain" length="128" />
+        </property>
+        <property name="shownTimes" type="int">
+            <column name="shown_times" not-null="true" />
+        </property>
+        <property name="clickedTimes" type="int">
+            <column name="clicked_times" not-null="true" />
+        </property>
+        <property name="closedTimes" type="int">
+            <column name="closed_times" not-null="true" />
+        </property>
+        <property name="weight" type="float">
+            <column name="weight" precision="8" scale="8" not-null="true" />
+        </property>
+        <property name="expireDateTime" type="timestamp">
+            <column name="expire_date_time" length="29" />
+        </property>
+        <property name="createdDateTime" type="timestamp">
+            <column name="created_date_time" length="29" not-null="true" />
+        </property>
+        <property name="expiredFlag" type="boolean">
+            <column name="expired_flag" not-null="true" />
+        </property>
+        <property name="deletedFlag" type="boolean">
+            <column name="deleted_flag" not-null="true" />
+        </property>
+        <set name="ad2users" table="ad2user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ad_id" not-null="true" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Ad2user" />
+        </set>
+        <set name="pattern2ads" table="pattern2ad" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="ad_id" not-null="true" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Pattern2ad" />
+        </set>
+    </class>
+</hibernate-mapping>

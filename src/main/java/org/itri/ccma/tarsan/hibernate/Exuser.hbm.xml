@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 01:28:50 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.Exuser" table="exuser" schema="public">
+        <id name="exuserId" type="long">
+            <column name="exuser_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="exusergroup" class="org.itri.ccma.tarsan.hibernate.Exusergroup" fetch="select">
+            <column name="group_id" />
+        </many-to-one>
+        <property name="account" type="string">
+            <column name="account" length="128" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="128" />
+        </property>
+        <property name="name" type="string">
+            <column name="name" length="128" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="128" />
+        </property>
+        <property name="phone" type="string">
+            <column name="phone" length="15" />
+        </property>
+        <property name="address" type="string">
+            <column name="address" length="128" />
+        </property>
+        <property name="company" type="string">
+            <column name="company" length="128" />
+        </property>
+        <property name="timezone" type="string">
+            <column name="timezone" length="128" />
+        </property>
+        <property name="country" type="string">
+            <column name="country" length="128" />
+        </property>
+        <property name="currency" type="string">
+            <column name="currency" length="128" />
+        </property>
+        <property name="createdate" type="timestamp">
+            <column name="createdate" length="29" />
+        </property>
+        <property name="lastlogin" type="timestamp">
+            <column name="lastlogin" length="29" />
+        </property>
+        <set name="exuserlogs" table="exuserlog" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="exuser_id" not-null="true" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Exuserlog" />
+        </set>
+        <set name="buyads" table="buyad" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="exuser_id" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Buyad" />
+        </set>
+        <set name="vacantads" table="vacantad" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="exuser_id" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Vacantad" />
+        </set>
+    </class>
+</hibernate-mapping>

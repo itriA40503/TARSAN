@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 3, 2015 11:03:17 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.WebType" table="web_type" optimistic-lock="version">
+        <id name="webTypeId" type="long">
+            <column name="web_type_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="name" type="string">
+            <column name="name" length="64" not-null="true" />
+        </property>
+        <property name="remarks" type="string">
+            <column name="remarks" length="512" />
+        </property>
+    </class>
+</hibernate-mapping>

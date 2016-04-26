@@ -1,0 +1,8 @@
+org.itri.ccma.ubike.biz.BoParkingLot
+org.itri.ccma.ubike.biz.BoReservation
+org.itri.ccma.ubike.biz.BoUser
+org.itri.ccma.ubike.common
+org.itri.ccma.ubike.facade
+org.itri.ccma.ubike.facade.impl
+org.itri.ccma.ubike.server
+org.itri.ccma.ubike.service

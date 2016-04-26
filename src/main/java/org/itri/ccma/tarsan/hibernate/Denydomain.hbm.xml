@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 01:28:50 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.Denydomain" table="denydomain" schema="public">
+        <id name="ddId" type="long">
+            <column name="dd_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="DDomain" type="string">
+            <column name="d_domain" length="128" />
+        </property>
+    </class>
+</hibernate-mapping>

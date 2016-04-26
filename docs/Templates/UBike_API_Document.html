@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>UBike_API_Document.md</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+*{margin:0;padding:0;}
+body {
+	font:13.34px helvetica,arial,freesans,clean,sans-serif;
+	color:black;
+	line-height:1.4em;
+	background-color: #F8F8F8;
+	padding: 0.7em;
+}
+p {
+	margin:1em 0;
+	line-height:1.5em;
+}
+table {
+	font-size:inherit;
+	font:100%;
+	margin:1em;
+}
+table th{border-bottom:1px solid #bbb;padding:.2em 1em;}
+table td{border-bottom:1px solid #ddd;padding:.2em 1em;}
+input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}
+select,option{padding:0 .25em;}
+optgroup{margin-top:.5em;}
+pre,code{font:12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;}
+pre {
+	margin:1em 0;
+	font-size:12px;
+	background-color:#eee;
+	border:1px solid #ddd;
+	padding:5px;
+	line-height:1.5em;
+	color:#444;
+	overflow:auto;
+	-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;border-radius:3px;
+}
+pre code {
+	padding:0;
+	font-size:12px;
+	background-color:#eee;
+	border:none;
+}
+code {
+	font-size:12px;
+	background-color:#f8f8ff;
+	color:#444;
+	padding:0 .2em;
+	border:1px solid #dedede;
+}
+img{border:0;max-width:100%;}
+abbr{border-bottom:none;}
+a{color:#4183c4;text-decoration:none;}
+a:hover{text-decoration:underline;}
+a code,a:link code,a:visited code{color:#4183c4;}
+h2,h3{margin:1em 0;}
+h1,h2,h3,h4,h5,h6{border:0;}
+h1{font-size:170%;border-top:4px solid #aaa;padding-top:.5em;margin-top:1.5em;}
+h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}
+h2{font-size:150%;margin-top:1.5em;border-top:4px solid #e0e0e0;padding-top:.5em;}
+h3{margin-top:1em;}
+hr{border:1px solid #ddd;}
+ul{margin:1em 0 1em 2em;}
+ol{margin:1em 0 1em 2em;}
+ul li,ol li{margin-top:.5em;margin-bottom:.5em;}
+ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}
+blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}
+dt{font-weight:bold;margin-left:1em;}
+dd{margin-left:2em;margin-bottom:1em;}
+@media screen and (min-width: 768px) {
+    body {
+        width: 1024px;
+        margin:10px auto;
+    }
+}
+</style>
+</head>
+<body>
+<h1><strong>UBike API Document</strong><br><br></h1>
+
+<h3><code>public List<!--?--> login (String encryptedText)</code> <br></h3>
+
+<pre>Usage: http://140.96.29.153:8080/UBike/service/main?service=login&amp;jsonPara=[(encryptedText:"34E317A0FA97EAF689E10E6183866365A79FF214BA828EE51D57037987D530CAFEF76E2DE0723B4C3E2A415C58779C35")]
+Response: 
+    "status": [200|400], // 200表示API呼叫成功執行; 400表示API呼叫出現錯誤
+    "login": [String sessionId|0] // 回傳非0的sessionId代表登入成功; 0代表登入失敗
+</pre>
+
+<h3><code>public List<!--?--> queryExample ()</code> <br></h3>
+
+<pre>Usage: http://140.96.29.153:8080/UBike/service/main?service=queryExample&amp;jsonPara=[]
+Response: 
+    "status": [200|400], // 200表示API呼叫成功執行; 400表示API呼叫出現錯誤
+    {
+        "total": 1,
+        "page": 1,
+        "cameraId": 20,
+        "longitude": 120.97637,
+        "latitude": 24.79071,
+        "location": "Test Location",
+        "maintask": "Big Object",
+        "manufacturer": "CCMA",
+        "videoFormat": "ATSC",
+        "videoCodec": "MPEG4",
+        "dvr": "140.96.29.153",
+        "thumbnailImageUrl": "http://example.org/example.jpeg",
+        "direction": 1
+    } 
+</pre>
+
+<p><code>public List<!--?--> getMapInfo (Stirng sessionId)</code> <br></p>
+
+<pre>Usage: http://140.96.29.153:8080/UBike/service/main?service=getMapInfo&amp;jsonPara=[(sessionId:ABCDE)]
+Response: 
+    "status": [200|400], // 200表示API呼叫成功執行; 400表示API呼叫出現錯誤
+    [
+        {
+            "parkLotId": 1,
+            "parkLotName": "51",
+            "bikeLeftNum": 3,
+            "parkSpaceTotalNum": 10,
+            "bikeAvaliableForReserve": 2,
+            "reserveBike":1
+        },
+        {
+            "parkLotId": 2,
+            "parkLotName": "51",
+            "bikeLeftNum": 3,
+            "parkSpaceTotalNum": 10,
+            "bikeAvaliableForReserve": 2,
+            "reserveBike":1
+        },
+        {
+            "parkLotId": 3,
+            "parkLotName": "51",
+            "bikeLeftNum": 3,
+            "parkSpaceTotalNum": 10,
+            "bikeAvaliableForReserve": 2,
+            "reserveBike":1
+        },
+        {
+            "parkLotId": 4,
+            "parkLotName": "51",
+            "bikeLeftNum": 3,
+            "parkSpaceTotalNum": 10,
+            "bikeAvaliableForReserve": 2,
+            "reserveBike":1
+        },
+        {
+            "parkLotId": 5,
+            "parkLotName": "51",
+            "bikeLeftNum": 3,
+            "parkSpaceTotalNum": 10,
+            "bikeAvaliableForReserve": 2,
+            "reserveBike":1
+        },
+        {
+            "parkLotId": 6,
+            "parkLotName": "51",
+            "bikeLeftNum": 3,
+            "parkSpaceTotalNum": 10,
+            "bikeAvaliableForReserve": 2,
+            "reserveBike":1
+        },
+        {
+            "parkLotId": 7,
+            "parkLotName": "51",
+            "bikeLeftNum": 3,
+            "parkSpaceTotalNum": 10,
+            "bikeAvaliableForReserve": 2,
+            "reserveBike":1
+        },
+        {
+            "parkLotId": 8,
+            "parkLotName": "51",
+            "bikeLeftNum": 3,
+            "parkSpaceTotalNum": 10,
+            "bikeAvaliableForReserve": 2,
+            "reserveBike":1
+        },
+        {
+            "parkLotId": 9,
+            "parkLotName": "51",
+            "bikeLeftNum": 3,
+            "parkSpaceTotalNum": 10,
+            "bikeAvaliableForReserve": 2,
+            "reserveBike":1
+        },
+        {
+            "parkLotId": 10,
+            "parkLotName": "51",
+            "bikeLeftNum": 3,
+            "parkSpaceTotalNum": 10,
+            "bikeAvaliableForReserve": 2,
+            "reserveBike":1
+        },
+        {
+            "parkLotId": 11,
+            "parkLotName": "51",
+            "bikeLeftNum": 3,
+            "parkSpaceTotalNum": 10,
+            "bikeAvaliableForReserve": 2,
+            "reserveBike":1
+        },
+        {
+            "parkLotId": 12,
+            "parkLotName": "51",
+            "bikeLeftNum": 3,
+            "parkSpaceTotalNum": 10,
+            "bikeAvaliableForReserve": 2,
+            "reserveBike":1
+        }
+    ]
+</pre>
+
+<p><code>public List<!--?--> getReserveInfo (Stirng sessionId)</code> <br></p>
+
+<pre>Usage: http://140.96.29.153:8080/UBike/service/main?service=getReserveInfo&amp;jsonPara=[(sessionId:ABCDE)]
+Response: 
+    "status": [200|201|400], // 200表示預約中狀態;201表示行駛中狀態; 400表示API呼叫出現錯誤
+    {
+        "reserveId": 1,
+        "leftTime": 600000, //剩餘預約到期時間 或 剩餘還車到期時間
+        "parkLotId": 1,
+        "parkSpaceId": 1,
+        "parkLotName": "51"
+    }
+</pre>
+
+<p><code>public List<!--?--> getStartStatus (Stirng sessionId)</code> <br></p>
+
+<pre>已停用,功能與getMapInfo相同
+</pre>
+
+<p><code>public List<!--?--> reserveBike (Stirng sessionId, Long parkingLotId, String parkingLotName)</code> <br></p>
+
+<pre>Usage: http://140.96.29.153:8080/UBike/service/main?service=reserveBike&amp;jsonPara=[(sessionId:ABCDE),(parkingLotId:1),(parkingLotName:51)]
+Response: 
+    "status": [200|400], // 200表示API呼叫成功執行; 400表示API呼叫出現錯誤
+    {
+        "parkLotId": 1,
+        "parkLotName": "51",
+        "parkSpaceId": 1
+    }
+</pre>
+
+<p><code>public List<!--?--> cancelReservation (Stirng sessionId, Long reserveId)</code> <br></p>
+
+<pre>Usage: http://140.96.29.153:8080/UBike/service/main?service=cancelReservation&amp;jsonPara=[(sessionId:ABCDE),(reserveId:1)]
+Response: 
+    "status": [200|400], // 200表示API呼叫成功執行; 400表示API呼叫出現錯誤
+    "errMessage":"失敗原因", 若status為400, 則顯示errMessage    
+</pre>
+
+<p><code>public List<!--?--> deleteReservationByAccount (Stirng account)</code> <br></p>
+
+<pre>Usage: http://140.96.29.153:8080/UBike/service/main?service=deleteReservationByAccount&amp;jsonPara=[(account:123456)]
+Response: 
+    "status": [200|400], // 200表示API呼叫成功執行; 400表示API呼叫出現錯誤
+    "errMessage":"no data deleted(account=123456)", 若status為400, 則顯示errMessage
+
+</pre>
+
+<p><code>public List<!--?--> setLocation (Stirng sessionId, String longitude, String latitude)</code> <br></p>
+
+<pre>Usage: http://140.96.29.153:8080/UBike/service/main?service=setLocation&amp;jsonPara=[(sessionId:7134EA812),(longitude:"120.97637"),(latitude:"24.79071")]
+Response: 
+    "status": [200|400], // 200表示API呼叫成功執行; 400表示API呼叫出現錯誤
+    {
+        "partLotId": 1,
+        "parkLotName": "51 館",
+        "parkSpaceNum": 11,
+        "sosTelNum": "12345"
+    }
+</pre>
+
+<p><code>public List<!--?--> createContactLog (Stirng sessionId, String longitude, String latitude, String sosTelNum)</code> <br></p>
+
+<pre>Usage: http://140.96.29.153:8080/UBike/service/main?service=createContactLog&amp;jsonPara=[(sessionId:7134EA812),(longitude:"120.97637"),(latitude:"24.79071"),(sosTelNum:"12345")]
+Response: 
+    "status": [200|400], // 200表示API呼叫成功執行; 400表示API呼叫出現錯誤
+    {
+        "createContactLog": [1|0]  // 1代表寫入聯絡記錄成功，0代表失敗
+    }
+</pre>
+
+<p><code>public List<!--?--> registration (Stirng sessionId, String registrationId)</code> <br></p>
+
+<pre>Usage: http://140.96.29.153:8080/UBike/service/main?service=registration&amp;jsonPara=[(sessionId:ABCDE),(registrationId:ABCDE)]
+Response: 
+    "status": [200|400], // 200表示API呼叫成功執行; 400表示API呼叫出現錯誤
+    {
+        "registration": [1|0],
+        "registrationId": [String registrationId]
+    }
+</pre>
+
+<p><code>public List<!--?--> deregistration (Stirng sessionId, String registrationId)</code> <br></p>
+
+<pre>Usage: http://140.96.29.153:8080/UBike/service/main?service=deregistration&amp;jsonPara=[(sessionId:ABCDE),(registrationId:ABCDE)]
+Response: 
+    "status": [200|400], // 200表示API呼叫成功執行; 400表示API呼叫出現錯誤
+    {
+        "deregistration": [1|0],
+        "registrationId": [String registrationId]
+    }
+</pre>
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

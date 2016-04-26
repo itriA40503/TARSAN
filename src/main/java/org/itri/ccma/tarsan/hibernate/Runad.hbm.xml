@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 01:28:50 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.Runad" table="runad" schema="public">
+        <composite-id name="id" class="org.itri.ccma.tarsan.hibernate.RunadId">
+            <key-property name="runadId" type="long">
+                <column name="runad_id" />
+            </key-property>
+            <key-property name="postadId" type="long">
+                <column name="postad_id" />
+            </key-property>
+            <key-property name="buyadId" type="long">
+                <column name="buyad_id" />
+            </key-property>
+        </composite-id>
+        <property name="keywords" type="string">
+            <column name="keywords" length="128" />
+        </property>
+        <property name="type" type="string">
+            <column name="type" length="128" />
+        </property>
+        <property name="position" type="string">
+            <column name="position" length="128" />
+        </property>
+        <property name="size" type="string">
+            <column name="size" length="128" />
+        </property>
+        <property name="content" type="string">
+            <column name="content" length="65535" />
+        </property>
+        <property name="location" type="string">
+            <column name="location" length="128" />
+        </property>
+        <property name="startdate" type="timestamp">
+            <column name="startdate" length="29" />
+        </property>
+        <property name="enddate" type="timestamp">
+            <column name="enddate" length="29" />
+        </property>
+        <property name="intervaltime" type="string">
+            <column name="intervaltime" length="128" />
+        </property>
+        <property name="createdate" type="timestamp">
+            <column name="createdate" length="29" />
+        </property>
+        <property name="updatetime" type="timestamp">
+            <column name="updatetime" length="29" />
+        </property>
+        <property name="close" type="java.lang.Boolean">
+            <column name="close" />
+        </property>
+    </class>
+</hibernate-mapping>

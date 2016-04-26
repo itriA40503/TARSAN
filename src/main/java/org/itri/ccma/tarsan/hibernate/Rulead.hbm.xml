@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/10 ?W?? 09:36:51 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.Rulead" table="rulead" schema="public">
+        <id name="ruleadId" type="long">
+            <column name="rulead_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="postadId" type="java.lang.Long">
+            <column name="postad_id" />
+        </property>
+        <property name="buyadId" type="java.lang.Long">
+            <column name="buyad_id" />
+        </property>
+        <property name="keyword" type="string">
+            <column name="keyword" length="128" />
+        </property>
+        <property name="domain" type="string">
+            <column name="domain" length="128" />
+        </property>
+        <property name="type" type="string">
+            <column name="type" length="128" />
+        </property>
+        <property name="position" type="string">
+            <column name="position" length="128" />
+        </property>
+        <property name="size" type="string">
+            <column name="size" length="128" />
+        </property>
+        <property name="content" type="string">
+            <column name="content" length="128" />
+        </property>
+        <property name="startdate" type="timestamp">
+            <column name="startdate" length="29" />
+        </property>
+        <property name="enddate" type="timestamp">
+            <column name="enddate" length="29" />
+        </property>
+        <property name="intervaltime" type="string">
+            <column name="intervaltime" length="128" />
+        </property>
+        <property name="createdate" type="timestamp">
+            <column name="createdate" length="29" />
+        </property>
+        <property name="close" type="java.lang.Boolean">
+            <column name="close" />
+        </property>
+    </class>
+</hibernate-mapping>

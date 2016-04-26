@@ -1,0 +1,36 @@
+If the database changed, need to do the following:
+- run SqlUtil script (python) on the new database creation sql script
+- Execute new sql script to create a new database
+- Delete all files in the hibernate folder
+- Run hibernate wizard to create DAO files
+- run hibernateUtil (python) script
+- Add @JsonIgnore at getter function on Pattern.java, Pattern2ad.java, and Userevent.java
+
+<Pattern.java>
+@OneToMany(fetch = FetchType.LAZY, mappedBy = "pattern")
+@JsonIgnore
+public Set<Pattern2ad> getPattern2ads() {
+	return this.pattern2ads;
+}
+
+@OneToMany(fetch = FetchType.LAZY, mappedBy = "pattern")
+@JsonIgnore
+public Set<Userevent> getUserevents() {
+	return this.userevents;
+}
+
+<Pattern2ad.java>
+@ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = "pattern_id", nullable = false)
+@JsonIgnore
+public Pattern getPattern() {
+	return this.pattern;
+}
+
+<Userevent.java>
+@ManyToOne(fetch = FetchType.LAZY)
+@JoinColumn(name = "pattern_id")
+@JsonIgnore
+public Pattern getPattern() {
+	return this.pattern;
+}

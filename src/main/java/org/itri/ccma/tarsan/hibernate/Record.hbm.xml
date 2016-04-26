@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2015/12/7 ?U?? 03:35:46 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Record" table="record">
+        <composite-id name="id" class="RecordId">
+            <key-property name="usersId" type="long">
+                <column name="users_id" />
+            </key-property>
+            <key-property name="barcodeId" type="long">
+                <column name="barcode_id" />
+            </key-property>
+        </composite-id>
+        <property name="recordDateTime" type="timestamp">
+            <column name="record_date_time" length="29" />
+        </property>
+        <property name="coordinateX" type="string">
+            <column name="coordinate_x" length="128" />
+        </property>
+        <property name="coordinateY" type="string">
+            <column name="coordinate_y" length="128" />
+        </property>
+    </class>
+</hibernate-mapping>

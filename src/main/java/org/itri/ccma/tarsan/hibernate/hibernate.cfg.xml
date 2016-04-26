@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC
+"-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+    <session-factory>
+        <property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+        <property name="hibernate.connection.driver_class">org.postgresql.Driver</property>
+        <property name="hibernate.connection.password">123456</property>
+        <property name="hibernate.connection.url">jdbc:postgresql://ec2-54-64-67-143.ap-northeast-1.compute.amazonaws.com:5432/tarsan_exchange</property>
+        <property name="hibernate.connection.username">postgres</property>
+        <property name="hibernate.dialect">org.hibernate.dialect.PostgreSQLDialect</property>
+        <property name="hibernate.search.autoregister_listeners">false</property>
+        <property name="hibernate.validator.apply_to_ddl">false</property>
+        <mapping class="org.itri.ccma.tarsan.hibernate.Pattern2ad" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.Buyad" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.Exusergroup" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.PatternType" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.Logad" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.Pattern" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.Users" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.Exuserlog" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.Ad2user" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.Rulead" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.Vacantad" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.Barcode" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.Denykeyword" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.Record" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.Exuser" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.AdGroup" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.Ad" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.Postad" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.WebType" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.Denydomain" />
+        <mapping class="org.itri.ccma.tarsan.hibernate.Userevent" />
+    </session-factory>
+</hibernate-configuration>

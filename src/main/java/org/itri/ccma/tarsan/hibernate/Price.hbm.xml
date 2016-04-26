@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 01:28:50 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.Price" table="price" schema="public">
+        <id name="priceId" type="long">
+            <column name="price_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="vacantad" class="org.itri.ccma.tarsan.hibernate.Vacantad" fetch="select">
+            <column name="vacant_id" />
+        </many-to-one>
+        <property name="priceNum" type="string">
+            <column name="price_num" length="128" />
+        </property>
+        <property name="priceUnit" type="string">
+            <column name="price_unit" length="128" />
+        </property>
+        <property name="priceTotal" type="string">
+            <column name="price_total" length="128" />
+        </property>
+    </class>
+</hibernate-mapping>

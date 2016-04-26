@@ -1,0 +1,593 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>MSB_API_Document.md</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<style type="text/css">
+*{margin:0;padding:0;}
+body {
+	font:13.34px helvetica,arial,freesans,clean,sans-serif;
+	color:black;
+	line-height:1.4em;
+	background-color: #F8F8F8;
+	padding: 0.7em;
+}
+p {
+	margin:1em 0;
+	line-height:1.5em;
+}
+table {
+	font-size:inherit;
+	font:100%;
+	margin:1em;
+}
+table th{border-bottom:1px solid #bbb;padding:.2em 1em;}
+table td{border-bottom:1px solid #ddd;padding:.2em 1em;}
+input[type=text],input[type=password],input[type=image],textarea{font:99% helvetica,arial,freesans,sans-serif;}
+select,option{padding:0 .25em;}
+optgroup{margin-top:.5em;}
+pre,code{font:12px Monaco,"Courier New","DejaVu Sans Mono","Bitstream Vera Sans Mono",monospace;}
+pre {
+	margin:1em 0;
+	font-size:12px;
+	background-color:#eee;
+	border:1px solid #ddd;
+	padding:5px;
+	line-height:1.5em;
+	color:#444;
+	overflow:auto;
+	-webkit-box-shadow:rgba(0,0,0,0.07) 0 1px 2px inset;
+	-webkit-border-radius:3px;
+	-moz-border-radius:3px;border-radius:3px;
+}
+pre code {
+	padding:0;
+	font-size:12px;
+	background-color:#eee;
+	border:none;
+}
+code {
+	font-size:12px;
+	background-color:#f8f8ff;
+	color:#444;
+	padding:0 .2em;
+	border:1px solid #dedede;
+}
+img{border:0;max-width:100%;}
+abbr{border-bottom:none;}
+a{color:#4183c4;text-decoration:none;}
+a:hover{text-decoration:underline;}
+a code,a:link code,a:visited code{color:#4183c4;}
+h2,h3{margin:1em 0;}
+h1,h2,h3,h4,h5,h6{border:0;}
+h1{font-size:170%;border-top:4px solid #aaa;padding-top:.5em;margin-top:1.5em;}
+h1:first-child{margin-top:0;padding-top:.25em;border-top:none;}
+h2{font-size:150%;margin-top:1.5em;border-top:4px solid #e0e0e0;padding-top:.5em;}
+h3{margin-top:1em;}
+hr{border:1px solid #ddd;}
+ul{margin:1em 0 1em 2em;}
+ol{margin:1em 0 1em 2em;}
+ul li,ol li{margin-top:.5em;margin-bottom:.5em;}
+ul ul,ul ol,ol ol,ol ul{margin-top:0;margin-bottom:0;}
+blockquote{margin:1em 0;border-left:5px solid #ddd;padding-left:.6em;color:#555;}
+dt{font-weight:bold;margin-left:1em;}
+dd{margin-left:2em;margin-bottom:1em;}
+@media screen and (min-width: 768px) {
+    body {
+        width: 1024px;
+        margin:10px auto;
+    }
+}
+</style>
+</head>
+<body>
+<h1><strong>MSB API Document</strong><br><br></h1>
+
+<h3><code>public List<!--?--> login (String encryptedText)</code> <br></h3>
+
+<pre>Usage: http://140.96.29.153:8080/MSB/service/main?service=login&amp;jsonPara=[(encryptedText:"34E317A0FA97EAF689E10E6183866365A79FF214BA828EE51D57037987D530CAFEF76E2DE0723B4C3E2A415C58779C35")]
+Response: 
+    "status": [200|400], // 200表示成功執行; 400表示出現錯誤
+    "login": [String sessionId|0] // 回傳非0的sessionId代表登入成功; 0代表登入失敗
+</pre>
+
+<p><code>public List<!--?--> createUser(String sessionId, String email, String phone, String barcode, String pin, String password, String nickname)</code> <br></p>
+
+<pre>Usage: http://140.96.29.153:8181/MSB/service/main?service=createUser&jsonPara=[("email":"111@222.com"),("phone":"0900111222"),("barcode":"lkrwern342l4lsf"),("pin":"8787"),("password":"12345"),("nickname":"Nickname"),("timeStamp":"1425287690")]&signature=aae91232150c192a9f5cf7094185306b
+"JSONPara" parameters:
+	email: email
+	phone: 註冊後為帳號名
+	barcode: 手機條碼
+	password: password
+	nickname: 使用者暱稱
+	timeStamp: unix time stamp (用來製作tmpKey)
+
+Response: 
+    "status": [200|400], // 200表示成功執行; 400表示使用者已註冊
+	[
+		{
+			"status":200
+		},
+		{
+			"createUser":"57C870168024C753E6AFB45A98849EA5"
+		},
+		{
+			"tmpKey":"d38d4e10e1f299f48c5e958468c70568"
+			"tmp_pwd":"8d806bc2049b895e3040bf14b01cca4a"
+			"usergroupName":"personal group"
+			"usergroupQRCode":"95f1b6a75d5a3d33403d6b6af341845b"
+		}
+	]
+
+</pre>
+
+
+<p><code>public List<!--?--> QryWinningList(String sessionId, String invTerm, String tmpKey)</code> <br></p>
+
+<pre>Usage:http://140.96.29.153:8181/MSB/service/main?service=QryWinningList&jsonPara=[("invTerm":"10106"),("tmpKey":"41f52d6ede0d3bc917a80ff4ff7245cb"),("timeStamp":"1425287690")]&signature=klJSKFOIEWFEWFJEKFW]
+"JSONPara" parameters:
+	invTerm: 發票期別 (民國; yyyMM)
+	timeStamp: unix time stamp
+	
+Response: 
+    "status": [200|400], // 200表示成功執行;400表示無此期資料
+    [  
+	   {
+		  "status":200
+	   },
+	   {
+		  "getWinningListDB":"568F923BA6514BD8E03F17513D70DDEF"
+	   },
+	   {  
+		  "firstPrizeAmt":"0200000",
+		  "thirdPrizeAmt":"0010000",
+		  "spcPrizeNo":"64348046",
+		  "superPrizeNo":"40148354",
+		  "firstPrizeNo2":"88904036",
+		  "firstPrizeNo1":"64782404",
+		  "fifthPrizeAmt":"0001000",
+		  "firstPrizeNo10":"",
+		  "spcPrizeAmt":"2000000",
+		  "sixthPrizeNo6":"",
+		  "sixthPrizeNo5":"",
+		  "sixthPrizeAmt":"0000200",
+		  "firstPrizeNo7":"",
+		  "firstPrizeNo8":"",
+		  "firstPrizeNo9":"",
+		  "fourthPrizeAmt":"0004000",
+		  "firstPrizeNo3":"17250629",
+		  "spcPrizeNo2":"",
+		  "sixthPrizeNo2":"",
+		  "firstPrizeNo4":"",
+		  "sixthPrizeNo1":"516",
+		  "sixthPrizeNo4":"",
+		  "secondPrizeAmt":"0040000",
+		  "firstPrizeNo5":"",
+		  "spcPrizeNo3":"",
+		  "firstPrizeNo6":"",
+		  "sixthPrizeNo3":""
+	   }
+	]
+</pre>
+
+
+<p><code>public List<!--?--> queryMsbInvList (String sessionId, String queryType, String tmpKey, String startDate, String endDate)</code> <br></p>
+
+<pre>Usage: http://140.96.29.153:8181/MSB/service/main?service=queryMsbInvList&jsonPara=[("queryType":"detail"),("tmpKey":"5414e2bb86d4f35082816cf14a5aa75d"),("startDate":"20141231"),("endDate":"20151131"),("timeStamp":"1425287690")]&signature=aae91232150c192a9f5cf7094185306b
+"JSONPara" parameters:
+	queryType: 查詢種類 (detail或simple, 分大小寫) (填detail回傳發票明細, simple則無)
+	queryType: 查詢種類 (winOnly或winAll, 分大小寫) (填winOnly回傳上一期中獎發票明細, winAll回傳所有中獎發票明細)
+	tmpKey: 使用者代碼
+	startDate: 查詢起始日 (西元; yyyyMMdd)
+	endDate: 查詢結束日 (西元; yyyyMMdd)
+	timeStamp: unix time stamp
+
+Response: 
+    "status": [200|400], // 200表示成功執行; 400表示使用者不存在(tmpKey不正確)
+	"invoice": 若查詢期間內無發票紀錄, 則為空
+	"details": 參數"queryType"若填simple, 則為空
+
+	[  
+	   {  
+		  "status":"200"
+	   },
+	   {  
+		  "queryMsbInvList":"F28F813B25BC0AC249762C808EDD9B17"
+	   },
+	   {  
+		  "limit":"9999",
+		  "periodAmt":19,
+		  "invoice":[  
+			 {  
+				"isWinning":"false",
+				"isSync":"true",
+				"cardNo":"/Q4IXUS2",
+				"invNum":"UN62225438",
+				"details":[  
+				   {  
+					  "amount":"10",
+					  "description":"泡沫綠茶ＴＰ３００",
+					  "quantity":"1",
+					  "unitPrice":"10",
+					  "rowNum":"1"
+				   },
+				   {  
+					  "amount":"-3",
+					  "description":"小計折扣-15%",
+					  "quantity":"1",
+					  "unitPrice":"0",
+					  "rowNum":"3"
+				   },
+				   {  
+					  "amount":"12",
+					  "description":"飛壘葡萄口香糖",
+					  "quantity":"1",
+					  "unitPrice":"12",
+					  "rowNum":"2"
+				   }
+				],
+				"isChecked":"false",
+				"totalAmount":19,
+				"sellerName":"竹東工研門市部",
+				"type":"",
+				"cardType":"3J0002",
+				"invDate":"20150311"
+			 }
+		  ]
+	   }
+	]
+
+</pre>
+
+
+<p><code>public List<!--?--> createMsbInvoice(String sessionId, String type, String invNum, String invDate, String invAmount,
+			String invDetail, String encrypt, String sellerID, String sellerName, String randomNum, String tmpKey)</code> <br></p>
+
+<pre>Usage: http://140.96.29.153:8181/MSB/service/main?service=createMsbInvoice&jsonPara=[("type":"Barcode"),("invNum":"UN62228206"),("invDate":"20150320"),(invAmount:"0"),("invDetail":"[%7B"amount":"30.00","description":"CoffeeMilk","quantity":"1","unitPrice":"30"%7D]"),("encrypt":"000000000000000000000000"),("sellerID":"00000000"),("sellerName":""),("randomNum":"4368"),("tmpKey":"b65fff53a3f00e70b82dd47a6b6cacd4"),("timeStamp":"1425287690")]&signature=klJSKFOIEWFEWFJEKFW]
+"JSONPara" parameters:
+	type: 發票種類 e.g. QRCode/Barcode/Trad
+	invNum: 發票號碼 e.g. KB85850646
+	invDate: 發票日期 e.g. 20140717
+	invAmount: 發票總價 e.g. 100
+	invDetail: 物品明細 e.g. [%7Bamount:30.00,description:CoffeeMilk,quantity:1,unitPrice:30%7D]
+	encrypt: 發票檢驗碼(24碼) e.g. 10653009G4B6AIlQxr9XH8Si
+	sellerID: 商家統編(8碼) e.g. 10653009
+	sellerName: 商家名e.g. 全家
+	randomNum: 發票隨機碼(4碼) e.g. 6610
+	tmpKey: 使用者代碼 e.g. 35cdeb7d433ff6f001d12a13fa2d3a42
+
+	
+(1)	當新增QRCode或Barcode發票時:
+
+	參數”type” 設為”QRCode”或”Barcode”
+	參數”invDetail” 可留空…如”” (因為之後會跟財政部同步,資訊以財政部為主)
+	參數”sellerName” 可留空…如”” (因為之後會跟財政部同步,資訊以財政部為主)
+	其他參數為必填
+	URL: 
+http://140.96.29.153:8181/MSB/service/main?service=createMsbInvoice&jsonPara=[("type":"QRCode"),("invNum":"KB12850646"),("invDate":"20140717"),(invAmount:"0"),("invDetail":"optional"),("encrypt":"10653009G4B6AIlQxr9XH8Si"),("sellerID":"10653009"),("sellerName":"optional"),("randomNum":"6610"),("tmpKey":"35cdeb7d433ff6f001d12a13fa2d3a42"),("timeStamp":"1425287690")]&signature=aae91232150c192a9f5cf7094185306b
+
+
+(2)	當新增傳統發票時:
+
+	參數”type” 設為”Trad”
+	參數”encrypt” 可留空…如””
+	參數”randomNum” 可留空…如””
+	參數”sellerID” 可留空…如””
+	參數”invDetail” 以JSONArray格式帶入, 一個物品包成一個JSONObject並包括下列參數:
+		description: 物品名 e.g. CoffeeMilk
+		quantity: 數量 e.g. 1
+		unitPrice: 單件金額 e.g. 30.00
+		amount: 金額(unitPrice乘quantity) e.g. 30.00
+	URL
+http://140.96.29.153:8181/MSB/service/main?service=createMsbInvoice&jsonPara=[("type":"Trad"),("invNum":"KB85850646"),("invDate":"20140717"),(invAmount:"0"),("invDetail":"[%7Bamount:30.00,description:CoffeeMilk,quantity:1,unitPrice:30,rowNum:1%7D]"),("encrypt":"optional"),("sellerID":"optional"),("sellerName":"FamilyMart"),("randomNum":"optional"),("tmpKey": "35cdeb7d433ff6f001d12a13fa2d3a42"),("timeStamp":"1425287690")]&signature=aae91232150c192a9f5cf7094185306b
+
+
+Response: 
+    "status": [200|201|202] // 200表示成功手動新增發票; 201表示成功加入但未經財政部確認; 202表示發票號碼已存在
+		[400|500|599] // 400表示出現錯誤; 500表示財政部主機內部錯誤; 599表示連線至財政部逾時
+    [  
+	   {  
+		  "status":"200"
+	   },
+	   {  
+		  "createMsbInvoice":"yxvx3syvn53qq3jqpnxoor9l"
+	   },
+	   {  
+		  "message":"Invoice successfully added"
+	   }
+	]
+</pre>
+
+
+<p><code>public List<!--?--> deleteMsbInvoice(String sessionId, String invNum, String tmpKey)</code> <br></p>
+
+<pre>Usage: http://140.96.29.153:8181/MSB/service/main?service=deleteMsbInvoice&jsonPara=[("invNum":"KB12850646"),("tmpKey":"5a916a29fc5116d2ed32ff83b482ef95"),("timeStamp":"1425287690")]&signature=klJSKFOIEWFEWFJEKFW
+"JSONPara" parameters:
+	invNum: the invoice number
+	tmpKey: the key of the user
+
+Response: 
+    "status": [200|400], // 200表示成功執行; 400表示發票不存在
+	[  
+	   {  
+		  "status":"200"
+	   },
+	   {  
+		  "deleteMsbInvoice":"81721F6155E3CE8F57CC70BE598F0FA7"
+	   },
+	   {  
+		  "message":"Invoice successfully deleted"
+	   }
+	]
+</pre>
+
+
+<p><code>public List<!--?--> manageMsbUserInfo(String sessionId, String action, String password, String pin, String spendLimit, String nickname, String tmpKey)</code> <br></p>
+
+<pre>Usage: http://140.96.29.153:8181/MSB/service/main?service=manageMsbUserInfo&jsonPara=[("action":"set"),("password":"null"),("pin":"null"),("spendLimit":"1000"),("nickname":"Nickname"),("tmpKey":"2d9a0fe53ee8adaf55bd86a040a0853a"),("timeStamp":"1425287690")]&signature=aae91232150c192a9f5cf7094185306b
+"JSONPara" parameters:
+	action: 查詢或設定 (query/set)
+	password: 密碼
+	pin: pin
+	nickname: 使用者暱稱
+	tmpKey: 使用者代碼
+
+	
+(1)	當要設定使用者資訊時: 
+	”action”參數設為”set”
+	除了要修改的項目，其他參數填”null” e.g. 參考範例URL
+
+(只設定水位spendLimit時)
+http://140.96.29.153:8181/MSB/service/main?service=manageMsbUserInfo&jsonPara=[("action":"set"),("password":"null"),("pin":"null"),("spendLimit":"9999"),("nickname":"Nickname"),("tmpKey":"2d9a0fe53ee8adaf55bd86a040a0853a"),("timeStamp":"1425287690")]&signature=aae91232150c192a9f5cf7094185306b
+
+
+(2)	當要取得使用者資訊時:
+	”action”參數設為”query”
+	其他參數除了”tmpKey”外 填”null”即可
+
+http://140.96.29.153:8181/MSB/service/main?service=manageMsbUserInfo&jsonPara=[("action":"query"),("password":"null"),("pin":"null"),("spendLimit":"null"),("nickname":"Nickname"),("tmpKey":"2d9a0fe53ee8adaf55bd86a040a0853a"),("timeStamp":"1425287690")]&signature=aae91232150c192a9f5cf7094185306b
+
+
+Response: 
+    "status": [200|400], // 200表示成功執行; 400表示出現錯誤
+    [  
+	   {  
+		  "status":200
+	   },
+	   {  
+		  "manageMsbUserInfo":"2DADF1C364E52D92331EFE0BC1AABC18"
+	   },
+	   {  
+		  "message":"User info successfully updated"
+	   }
+	]
+	
+"limit": 使用者設定水位
+[  
+	{  
+		"status":200
+	},
+	{  
+		"manageMsbUserInfo":"2DADF1C364E52D92331EFE0BC1AABC18"
+	},
+	{  
+		"password":"ccma_icl",
+		"pin":"8787",
+		"limit":"1000",
+		"nickname":"nickname",
+	}
+]
+</pre>
+
+
+<p><code>public List<!--?--> getUserInventory(String sessionId, String tmpKey)</code> <br></p>
+
+<pre>Usage: http://140.96.29.153:8181/MSB/service/main?service=getUserInventory&jsonPara=[("tmpKey":"b47e8bbd1bdc9d3690d888f631188f75"),("timeStamp":"1425287690")]&signature=aae91232150c192a9f5cf7094185306b
+"JSONPara" parameters:
+	tmpKey: 使用者代碼
+
+Response: 
+    "status": [200|400], // 200表示成功執行; 400表示使用者代碼不存在
+    [  
+	   {  
+		  "status":200
+	   },
+	   {  
+		  "getUserInventory":"8709C94A0EAD4849DDEE5CE82D624784"
+	   },
+	   {  
+		  "point":[],"reward":[]
+	   }
+	]
+	
+	
+	註: point或reward若為空值表示查無屬於該使用者的點數或獎品
+
+</pre>
+
+
+
+<p><code>public List<!--?--> getEventGroup(String sessionId, String tmpKey)</code> <br></p>
+
+<pre>Usage: http://140.96.29.153:8181/MSB/service/main?service=getEventGroup&jsonPara=[("tmpKey":"f7301a41f2ca1f280520ffe4eedd1383"),("timeStamp":"1425287690")]&signature=aae91232150c192a9f5cf7094185306b
+"JSONPara" parameters:
+	tmpKey: 使用者代碼
+
+Response: 
+    "status": [200|400], // 200表示成功執行; 400表示使用者代碼不存在
+    [  
+	   {  
+		  "status":200
+	   },
+	   {  
+		  "getEventGroup":"8709C94A0EAD4849DDEE5CE82D624784"
+	   },
+	   {  
+		  "eventGroups":[
+			{
+				"eventGroupId":"1",
+				"rewards":[
+					{
+						"rewardTypeName":"小雞娃娃",
+						"rewardTypeId":"1",
+						"rewardTypeImgUrl":"http://140.96.29.153:8181/MSB/imgs/icon-prize.png"
+					}
+				],
+				"eventGroupImgUrl":"http://140.96.29.153:8181/MSB/imgs/icon-prize.png",
+				"eventGroupEndDate":"2015-12-30 00:00:00.0",
+				"eventGroupStartDate":"2015-04-01 00:00:00.0",
+				"reqPoints":[
+					{
+						"pointTypeImgUrl":"http://140.96.29.153:8181/MSB/imgs/icon-salad.png",
+						"pointTypeId":"1",
+						"reqPointAmount":"2",
+						"pointTypeName":"雞蛋豆腐點數"
+					}
+				],
+				"eventGroupName":"雞蛋豆腐促銷"
+			}
+		}
+	]
+
+</pre>
+
+
+<p><code>public List<!--?--> chkEventGroupCompletion(String sessionId, String evtGroupId, String tmpKey)</code> <br></p>
+
+<pre>Usage: http://140.96.29.153:8181/MSB/service/main?service=chkEventGroupCompletion&jsonPara=[("evtGroupId":"1"),("tmpKey":"b47e8bbd1bdc9d3690d888f631188f75"),("timeStamp":"1425287690")]&signature=aae91232150c192a9f5cf7094185306b
+"JSONPara" parameters:
+	evtGroupId: 欲檢查是否已完成的活動號碼
+	tmpKey: 使用者代碼
+
+Response: 
+    "status": [200|400|401|402], // 200表示成功執行; 400表示使用者代碼或活動號碼不存在; 401表示活動過期或未開始; 402表示活動完成所需之點數不足
+    [  
+	   {  
+		  "status":200
+	   },
+	   {  
+		  "chkEventGroupCompletion":"8709C94A0EAD4849DDEE5CE82D624784"
+	   },
+	   {  
+		  "barcode":"barcode","expireDate":"Mon Jun 08 15:17:49 CST 2015"
+	   }
+	]
+
+</pre>
+
+
+
+<p><code>public List<!--?--> createUsergroup(String sessionId, String usergroupName, boolean isPublic, boolean isPersonal, String tmpKey)</code> <br></p>
+
+<pre>Usage:http://140.96.29.153:8181/MSB/service/main?service=createUsergroup&jsonPara=[("usergroupName":"Usergroup"),("isPublic":"true"),("isPersonal":"false"),("tmpKey":"b47e8bbd1bdc9d3690d888f631188f75")]&signature=aae91232150c192a9f5cf7094185306b
+"JSONPara" parameters:
+	usergroupName: 群組名
+	isPublic: 是否公開
+    isPersonal: 是否為私人群組
+	tmpKey: 使用者代碼
+
+Response: 
+    "status": [200|400|401|402], // 200表示成功執行; 400表示使用者代碼或活動號碼不存在; 401表示活動過期或未開始; 402表示活動完成所需之點數不足
+    [  
+	   {  
+		  "status":200
+	   },
+	   {  
+		  "chkEventGroupCompletion":"8709C94A0EAD4849DDEE5CE82D624784"
+	   },
+	   {  
+		  "barcode":"barcode","expireDate":"Mon Jun 08 15:17:49 CST 2015"
+	   }
+	]
+
+</pre>
+
+
+
+
+
+
+
+
+
+
+
+<p><code>public List<!--?--> qryInvHeader(String sessionId, String type, String invNum, String invDate, String tmpKey, String appId, String UUID)</code> <br></p>
+
+<pre>Usage: http://140.96.29.153:8181/MSB/service/main?service=qryInvHeader&jsonPara=[("type":"QRCode"),("invNum":"NB85954576"),("invDate":"20141212"),("tmpKey":"59dc13eaee6e3f45ea54273ef9da8025"),("appId":"EINV4201501170825"),("UUID":"a13adf9c-3a97-408c-8750-caba49b800ae"),("timeStamp":"1425287690")]&signature=aae91232150c192a9f5cf7094185306b
+"JSONPara" parameters:
+	type: 發票種類 (QRCode或Barcode, 大小寫要分)
+	invNum: 發票號碼 (前兩碼英文大寫, 後八碼數字)
+	invDate: 發票日期 (西元; yyyyMMdd)
+	tmpKey: 使用者代碼
+	appId: 應用程式帳號
+	UUID: 行動工具unique ID
+	timeStamp: unix time stamp
+	
+Response: 
+    "status": [200|400], // 200表示成功執行; 400表示出現錯誤
+    [  
+	   {
+		  "status":"200"
+	   },
+	   {
+		  "getInvoiceHeader":"C642C97DA38965878ED9BB1369D4F171"
+	   },
+	   {
+		  "invNum":"NB85954576",
+		  "invPeriod":"10312",
+		  "invStatus":"已確認",
+		  "sellerName":"安心食品服務股份有限公司工研院分公司",
+		  "code":"200",
+		  "msg":"查詢成功",
+		  "invDate":"20141212"
+	   }
+	]
+</pre>
+
+
+<p><code>public List<!--?--> qryInvDetail(String sessionId, String type, String invHID, String invNum, String invTerm, String invDate,
+			String encrypt, String sellerID, String randomNum, String userID, String appID, String UUID)</code> <br></p>
+
+<pre>Usage:http://140.96.29.153:8181/MSB/service/main?service=qryInvDetail&jsonPara=[("type":"QRCode"),("invNum":"TF63024870"),("invTerm":"10402"),("invDate":"20150114"),("encrypt":"10653009EA46VJPgvqUlWG5X"),("sellerID":"163009"),("randomNumber":"6057"),("appId":"EINV4201501170825"),("UUID":"a13adf9c-3a97-408c-8750-caba49b800ae"),("timeStamp":"1425287690")]&signature=aae91232150c192a9f5cf7094185306b
+"JSONPara" parameters:
+	type: 發票種類 (QRCode或Barcode, 大小寫要分)
+	invNum: 發票號碼 (前兩碼英文大寫, 後八碼數字)
+	invTerm: 發票期別 (民國; yyyMM) (type為Barcode時為必填)
+	invDate: 發票日期 (西元; yyyyMMdd)
+	encrypt: 卡片檢驗碼或手機條碼驗證碼(24碼) (type為QRCode時為必填)
+	sellerID: 商家統編 (8碼) (type為QRCode時為必填)
+	randomNumber: 發票隨機碼 (4碼)
+	appId: 應用程式帳號
+	UUID: 行動工具unique ID
+	timeStamp: unix time stamp
+	
+Response: 
+    "status": [200|400], // 200表示成功執行; 400表示出現錯誤
+	"details": 若資料尚未傳至財政部, 則為空
+	[  
+	   {  
+		  "status":"200"
+	   },
+	   {  
+		  "getInvDetail":"C642C97DA38965878ED9BB1369D4F171"
+	   },
+	   {  
+		  "invNum":"TF63024870",
+		  "details":[  
+			 {  
+				"amount":"29.00",
+				"description":"蘋果西打",
+				"unitPrice":"29",
+				"quantity":"1",
+				"rowNum":1
+			 },
+		  ]
+	   }
+	]    
+</pre> -->
+
+
+</body>
+</html>
+<!-- This document was created with MarkdownPad, the Markdown editor for Windows (http://markdownpad.com) -->

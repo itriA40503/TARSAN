@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 01:28:50 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.Vacantad" table="vacantad" schema="public">
+        <id name="vacantId" type="long">
+            <column name="vacant_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="exuser" class="org.itri.ccma.tarsan.hibernate.Exuser" fetch="select">
+            <column name="exuser_id" />
+        </many-to-one>
+        <property name="type" type="string">
+            <column name="type" length="128" />
+        </property>
+        <property name="size" type="string">
+            <column name="size" length="128" />
+        </property>
+        <property name="position" type="string">
+            <column name="position" length="128" />
+        </property>
+        <property name="startdate" type="timestamp">
+            <column name="startdate" length="29" />
+        </property>
+        <property name="enddate" type="timestamp">
+            <column name="enddate" length="29" />
+        </property>
+        <property name="intervaltime" type="string">
+            <column name="intervaltime" length="128" />
+        </property>
+        <property name="display" type="java.lang.Boolean">
+            <column name="display" />
+        </property>
+        <property name="createdate" type="timestamp">
+            <column name="createdate" length="29" not-null="true" />
+        </property>
+        <property name="updatetime" type="timestamp">
+            <column name="updatetime" length="29" />
+        </property>
+        <property name="del" type="java.lang.Boolean">
+            <column name="del" />
+        </property>
+        <set name="prices" table="price" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="vacant_id" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Price" />
+        </set>
+        <set name="locations" table="location" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="vacant_id" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Location" />
+        </set>
+        <set name="buyads" table="buyad" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="vacant_id" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Buyad" />
+        </set>
+    </class>
+</hibernate-mapping>

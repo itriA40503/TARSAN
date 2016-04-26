@@ -1,0 +1,27 @@
+@CHARSET "ISO-8859-1";
+div.itribanner{
+		font-family:arial;
+		color:black;
+		font-size:15px;
+		position:relative;
+		top: 0%;
+		left: 50%;
+		width:748px;
+		height:90px;
+		margin-top: -18px;
+		margin-left: -374px;
+		background:url("logo.png") no-repeat;
+		background-size: 208px 54px;
+		background-position: 10px 6px;
+		background-color:#00abeb;}
+div.textbox{
+		position:relative;
+		top: 8px;
+		left: 240px;
+		width:500px;
+		height:75px;
+}
+.textbox form {
+	margin-left: -410px;
+    margin-top: -10px;
+}

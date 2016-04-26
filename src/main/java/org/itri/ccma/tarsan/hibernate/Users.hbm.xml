@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 3, 2015 11:03:17 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.Users" table="users" optimistic-lock="version">
+        <id name="usersId" type="long">
+            <column name="users_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="account" type="string">
+            <column name="account" length="128" not-null="true" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="128" not-null="true" />
+        </property>
+        <property name="deletedFlag" type="boolean">
+            <column name="deleted_flag" not-null="true" />
+        </property>
+        <property name="tempkey" type="string">
+            <column name="tempkey" length="128" />
+        </property>
+        <property name="lastActiveDateTime" type="timestamp">
+            <column name="last_active_date_time" length="29" />
+        </property>
+        <property name="createdDateTime" type="timestamp">
+            <column name="created_date_time" length="29" not-null="true" />
+        </property>
+        <property name="ipAddress" type="string">
+            <column name="ip_address" length="128" />
+        </property>
+        <set name="ad2users" table="ad2user" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="users_id" not-null="true" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Ad2user" />
+        </set>
+        <set name="userevents" table="userevent" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="users_id" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Userevent" />
+        </set>
+    </class>
+</hibernate-mapping>

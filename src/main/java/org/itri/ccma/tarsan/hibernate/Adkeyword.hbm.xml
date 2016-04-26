@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 01:28:50 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.Adkeyword" table="adkeyword" schema="public">
+        <id name="adkId" type="long">
+            <column name="adk_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="buyad" class="org.itri.ccma.tarsan.hibernate.Buyad" fetch="select">
+            <column name="buyad_id" not-null="true" />
+        </many-to-one>
+        <property name="adKeyword" type="string">
+            <column name="ad_keyword" length="128" />
+        </property>
+    </class>
+</hibernate-mapping>

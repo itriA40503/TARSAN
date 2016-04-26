@@ -1,0 +1,49 @@
+# Working
+## Type 1
+## rakuten and ritzcamera couldn't show ads by using ICAP
+http://www.origins.com/products/search/esearch.tmpl?search=aloe+vera&x=0&y=0
+http://www.rakuten.com/sr/searchresults.aspx?qu=iphone+6
+http://www.drugstore.com/search/search_results.asp?N=0&Ntx=mode%2Bmatchallpartial&Ntk=All&srchtree=1&Ntt=nature+made+vitamin+C&Go.x=0&Go.y=0&CSRFToken=iXwEKL2Cebb8%2BEjdksr5RARz1mx0%2BTa%2FI%2FMg4cqnPqc%3D
+http://www.ritzcamera.com/searchresults?q=canon+SLR#q=canon%2BSLR&page=0&minPriceCount=0&refinements=[]
+http://search.ruten.com.tw/search/s000.php?searchfrom=indexbar&k=pillow&t=0
+http://www.dickssportinggoods.com/category/index.jsp?categoryId=12112586&sr=1&origkw=boots
+http://www.bathandbodyworks.com/search/index.jsp?kwCatId=&kw=HAND%20SOAP&origkw=hand+soap&sr=1
+## Type 2
+http://www.crutchfield.com/shopsearch/car_audio.html
+http://www.apple.com/tw/search/iPad-mini-Smart-Cover?src=serp
+
+# Unidentified
+https://tw.search.buy.yahoo.com/search/shopping/product?p=ipod+nano&qt=product&cid=0&clv=0
+## With various symbols
+http://www.walmart.com/search/?query=iphone%206%207%208%209%2010%20note%20pro%20!%40%23%24%25%5E%26*)(~%60_%2B-%2B%3D%7C%5C%2F%3E%3C.%2C%2F%3F%3A%3B%27%22%5D%5B%7D%7B%20asdf%20adfd%20fas
+http://search-en.lego.com/?q=iphone+6+7+8+9+10+note+pro+!%40%23%24%25%5e%26*)(~%60_+-+%3d%7c%5c%2f%3E%3C.%2c%2f%3f%3a%3b%27%22%5d%5b%7d%7b+asdf+adfd+fas&cc=US
+http://shopap.lenovo.com/SEUILibrary/controller/e/twweb/LenovoPortal/zh_TW/site.workflow:SimpleSiteSearch?q=iphone+6+7+8+9+10+note+pro+%21%40%23%24%25%5E%26*%29%28~%60_%2B-%2B%3D%7C%5C%2F%3E%3C.%2C%2F%3F%3A%3B%27%22%5D%5B%7D%7B+asdf+adfd+fas&cc=tw&lang=zh
+https://www.lowes.com/webapp/wcs/stores/servlet/SearchCatalog?catalogId=10051&catalogId=10051&langId=-1&langId=-1&storeId=10151&krypto=bzkdjVg1OuuhzzjWPQ7rdo0FscUFVdgA1g3imqgc3DJ%2F17OVQpF4SO3sk%2BwKJbFCR9Sp9dppsNsltLqu6Lflh0W1mD39GDI9bTCoNQpr9WZeR8EH3%2FqhEUfb2TS6b4Y87aX08inSB6sgO4FpSFLv8P%2B2axKLjrquhcZYWc0iJEq4BaG4UHzFIGfQJkEQeV9OVNbYtIbksSTFWYq3AEKJCS9rAPxw2PU3VLcBsKnnx8PdJh7qWhqp76nyKhydQmpXAnGPTtW5zEmTtSxrbLw4m%2FVCfe30gAggfAmKu24w4IcsasMgdF4rt1TS1jnystUW84fk5%2FD0EvtJkCC6AHpSKflo3B42inqfoA33Lu3RLIcGNx3qVUekJEHMspoqG3NDU2ZxxBQKAG%2FTz%2FI70jTQNMTxOrN8G18%2B4DUKfb25w0vn49XZOtYTNRdsXniuv3J1bUgL5W7UQVaNmQp0r%2FaBlxzCatub4dv%2BtMDwqSAee3y6WvlwKuQL84%2BJ%2FjVn56NmX92oLnf%2BftUrvAnXtjnzLSRV6oQCZawUhT2T2uIWPu8%3D#$^&)(~`_+-+=|\\/><.,/?:;'\"][}{+asdf+adfd+fas
+http://www1.macys.com/shop/search?keyword=iphone+6+7+8+9+10+note+pro+%21%40%23%24%25%5E%26*%29%28~%60_%2B-%2B%3D%7C%5C%2F%3E%3C.%2C%2F%3F%3A%3B%27%22%5D%5B%7D%7B+asdf+adfd
+http://www.target.com/s?searchTerm=iphone+6+7+8+9+10+note+pro+%21%40%23%24%25%5E%26*%29%28~%60_+-+%3D%7C%5C%2F%3E%3C.&category=0%7CAll%7Cmatchallpartial%7Call+categories&lnk=snav_sbox_iphone+6+7+8+9+10+note+pro+%21%40%23%24%25%5E%26*%29%28~%60_+-+%3D%7C%5C%2F%3E%3C.
+http://www.sunglasshut.com/webapp/wcs/stores/servlet/ProhibitedCharacterErrorView?searchType=102&searchSource=Q&searchingFrom=global&orderBy=default&showResultsPage=true&langId=-1&beginIndex=0&sType=SimpleSearch&pageSize=18&resultCatEntryType=2&searchTerm=iphone+6+7+8+9+10+note+pro+%21%40%23%24%25%5E%26*%29%28~%60_+-+%3D%7C%5C%2F%3E%3C.%2C%2F%3F%3A%3B%27%22%5D%5B%7D%7B+asd&catalogId=10101&pageView=image&storeId=10152
+http://www.sunglasshut.com/SearchDisplay?storeId=10152&catalogId=10101&langId=-1&pageSize=18&beginIndex=0&searchSource=Q&sType=SimpleSearch&resultCatEntryType=2&searchType=102&searchingFrom=global&showResultsPage=true&pageView=image&orderBy=default&searchTerm=iphon+e6
+http://www.target.com/s?searchTerm=iphonr&category=0%7CAll%7Cmatchallpartial%7Call+categories&lnk=snav_sbox_iphonr
+http://www.staples.com/iphone+6+7+8+9+10+note+pro+asdf+adfd+fas/directory_iphone+6+7+8+9+10+note+pro+asdf+adfd+fas?&akamai-feo=off
+http://store.sony.com/search;pgid=1Y5uWvBKmyhSRqbSnldTM2S50000eJCcDJs1;sid=mcEmleHjaMtNlLQi4slPkdHpVaIYdi2ApyLk4Gad?SearchTerm=iphone+6+7+8+9+10+note+pro+%21%40%23%24%25%5E%26*%29%28~%60_+-+%3D%7C%5C%2F%3E%3C.%2C%2F%3F%3A%3B%27%22%5D%5B%7D%7B+asdf+adfd+fas
+http://www.sierratradingpost.com/s~noresult/iphone%206%207%208%209%2010%20note%20pro%20%40%26_%20%20%20.%20asdf%20adfd%20fas/
+http://www1.macys.com/shop/search?keyword=iphone+6+7+8+9+10+note+pro+%21%40%23%24%25%5E%26*%29%28~%60_+-+%3D%7C%5C%2F%3E%3C.%2C%2F%3F%3A%3B%27%22%5D%5B%7D%7B+asdf+adfd
+http://www.meijer.com/catalog/search_command.cmd?keyword=iphone&tierId=
+http://www.officedepot.com/catalog/search.do;jsessionid=00000eJZvDfEByJhJ37CNlRdCim:17h4h7ado?Ntt=iphone+6+7+8+9+10+note+pro+%21%40%23%24%25%5E%26*%29%28~%60_+-+%3D%7C%5C%2F%3E%3C.%2C%2F%3F%3A%3B%27%22%5D%5B%7D%7B+asdf+adfd+fas#$%^&*)(~`_ - =|\\/><.,/?:;'\"][}{ asdf adfd fas&Ntt=iphone 6 7 8 9 10 note pro !@#$%^&*)(~`_ - =|\\/><.,/?:;'\"][}{ asdf adfd fas
+http://www.origins.com/products/search/esearch.tmpl?search=iphone+6+7+8+9+10+note+pro+%21%40%23%24%25%5E%26*%29%28~%60_+-+%3D%7C%5C%2F%3E%3C.%2C%2F%3F%3A%3B%27%22%5D%5B%7D%7B+asdf+adfd+fas&x=0&y=0
+http://www.overstock.com/search?keywords=iphone+6+7+8+9+10+note+pro+%21%40%23%24%25%5E%26*%29%28~%60_+-+%3D%7C%5C%2F%3E%3C.%2C%2F%3F%3A%3B%27%22%5D%5B%7D%7B+asdf+adfd+fas&SearchType=Header
+http://www.ralphlauren.com/search/noResults.jsp?kw=iphone+6+7+8+9+10+note+pro+-+%2F.%2F+asdf+adfd+fas
+http://www.ritzcamera.com/searchresults?q=iphone+6+7+8+9+10+note+pro+%21%40%23%24%25%5E%26*%29%28~%60_+-+%3D%7C%5C%2F%3E%3C.%2C%2F%3F%3A%3B%27%22%5D%5B%7D%7B+asdf+adfd+fas#q=iphone 6 7 8 9 10 note pro !@#$%^&*)(~`_ - =|\\/><.,/?:;'\"][}{ asdf adfd fas&page=0&refinements=%5B%5D
+http://www.rei.com/search.html?ir=q%3Aiphone+6+7+8+9+10+note+pro+%21%40%23%24%25%5E%26*%29%28~%60_+-+%3D%7C%5C%2F%3E%3C.%2C%2F%3F%3A%3B%27%22%5D%5B%7D%7B+asdf+adf&page=1&q=iphone+6+7+8+9+10+note+pro+%21%40%23%24%25%5E%26*%29%28~%60_+-+%3D%7C%5C%2F%3E%3C.%2C%2F%3F%3A%3B%27%22%5D%5B%7D%7B+asdf+adf
+http://www.thebodyshop-usa.com/search.aspx?q=iphone%206%207%208%209%2010%20note%20pro%20!%40%23%24%25%5E*)(~%60_%20-%20%3D%7C%5C%2F%3E%3C.%2C%2F%3F%3A%3B%27%22%5D%5B%7D%7B%20asdf%20adf
+
+# Failed
+## AJAX
+http://www.amazon.com/s/ref=nb_sb_noss_1?url=search-alias%3Daps&field-keywords=ipad+air
+## Redirection -- need continuous session
+http://www.pcstore.com.tw
+http://www.ralphlauren.com/search/index.jsp?kwCatId=&kw=men%20fragrance&origkw=men fragrance&sr=1
+http://www.ebags.com/brand/jansport?lastsearchterm=jansport
+## External Ads service
+http://www.cabelas.com/catalog/search.cmd?form_state=searchForm&N=0&fsch=true&Ntk=AllProducts&Ntt=boots&x=10&y=6&WTz_l=Header%3BSearch-All+Products
+http://www.finishline.com/store/shop/nike/_/N-1z141x6?categoryId=cat301802&searchTerm=nike

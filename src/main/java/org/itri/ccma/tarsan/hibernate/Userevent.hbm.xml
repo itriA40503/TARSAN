@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 3, 2015 11:03:17 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.Userevent" table="userevent" optimistic-lock="version">
+        <id name="usereventId" type="long">
+            <column name="userevent_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="pattern" class="org.itri.ccma.tarsan.hibernate.Pattern" fetch="select">
+            <column name="pattern_id" />
+        </many-to-one>
+        <many-to-one name="users" class="org.itri.ccma.tarsan.hibernate.Users" fetch="select">
+            <column name="users_id" />
+        </many-to-one>
+        <property name="searchKeyword" type="string">
+            <column name="search_keyword" length="512" />
+        </property>
+        <property name="createdDateTime" type="timestamp">
+            <column name="created_date_time" length="29" not-null="true" />
+        </property>
+        <property name="urlHost" type="string">
+            <column name="url_host" length="128" />
+        </property>
+        <property name="urlPath" type="string">
+            <column name="url_path" length="2048" />
+        </property>
+        <property name="sessionId" type="string">
+            <column name="session_id" length="128" />
+        </property>
+        <property name="ip" type="string">
+            <column name="ip" length="64" />
+        </property>
+        <property name="productSearchFlag" type="java.lang.Boolean">
+            <column name="product_search_flag" />
+        </property>
+        <property name="urlReferer" type="string">
+            <column name="url_referer" length="2048" />
+        </property>
+        <property name="parentId" type="java.lang.Long">
+            <column name="parent_id" />
+        </property>
+        <property name="rootId" type="java.lang.Long">
+            <column name="root_id" />
+        </property>
+    </class>
+</hibernate-mapping>

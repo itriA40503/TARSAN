@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 01:28:50 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.Location" table="location" schema="public">
+        <id name="locId" type="long">
+            <column name="loc_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="vacantad" class="org.itri.ccma.tarsan.hibernate.Vacantad" fetch="select">
+            <column name="vacant_id" />
+        </many-to-one>
+        <property name="house" type="string">
+            <column name="house" length="128" />
+        </property>
+        <property name="floor" type="string">
+            <column name="floor" length="10" />
+        </property>
+        <property name="zone" type="string">
+            <column name="zone" length="128" />
+        </property>
+        <set name="buyad2locs" table="buyad2loc" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="loc_id" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Buyad2loc" />
+        </set>
+    </class>
+</hibernate-mapping>

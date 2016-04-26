@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/29 ?U?? 05:29:39 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.Logad" table="logad" schema="public">
+        <id name="logadId" type="long">
+            <column name="logad_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="postad" class="org.itri.ccma.tarsan.hibernate.Postad" fetch="select">
+            <column name="postad_id" />
+            <column name="buyad_id" />
+        </many-to-one>
+        <property name="searchKeyword" type="string">
+            <column name="search_keyword" length="128" />
+        </property>
+        <property name="domain" type="string">
+            <column name="domain" length="128" />
+        </property>
+        <property name="urlhost" type="string">
+            <column name="urlhost" length="128" />
+        </property>
+        <property name="urlreferer" type="string">
+            <column name="urlreferer" length="65535" />
+        </property>
+        <property name="urlpath" type="string">
+            <column name="urlpath" length="65535" />
+        </property>
+        <property name="ip" type="string">
+            <column name="ip" length="128" />
+        </property>
+        <property name="show" type="java.lang.Boolean">
+            <column name="show" />
+        </property>
+        <property name="click" type="java.lang.Boolean">
+            <column name="click" />
+        </property>
+        <property name="createdate" type="timestamp">
+            <column name="createdate" length="29" not-null="true" />
+        </property>
+        <property name="hashkey" type="string">
+            <column name="hashkey" length="128" />
+        </property>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 3, 2015 11:03:17 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.Pattern" table="pattern" optimistic-lock="version">
+        <id name="patternId" type="long">
+            <column name="pattern_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="urlHost" type="string">
+            <column name="url_host" length="128" not-null="true" />
+        </property>
+        <property name="urlPath" type="string">
+            <column name="url_path" length="2048" />
+        </property>
+        <property name="signature" type="string">
+            <column name="signature" length="128" />
+        </property>
+        <property name="patternType" type="java.lang.Integer">
+            <column name="pattern_type" />
+        </property>
+        <property name="webType" type="java.lang.Integer">
+            <column name="web_type" />
+        </property>
+        <property name="createdDateTime" type="timestamp">
+            <column name="created_date_time" length="29" not-null="true" />
+        </property>
+        <property name="lastAccess" type="timestamp">
+            <column name="last_access" length="29" />
+        </property>
+        <property name="expiredFlag" type="boolean">
+            <column name="expired_flag" not-null="true" />
+        </property>
+        <property name="deletedFlag" type="boolean">
+            <column name="deleted_flag" not-null="true" />
+        </property>
+        <property name="confirmedFlag" type="boolean">
+            <column name="confirmed_flag" not-null="true" />
+        </property>
+        <set name="pattern2ads" table="pattern2ad" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pattern_id" not-null="true" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Pattern2ad" />
+        </set>
+        <set name="userevents" table="userevent" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="pattern_id" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Userevent" />
+        </set>
+    </class>
+</hibernate-mapping>

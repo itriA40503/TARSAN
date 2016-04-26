@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:task="http://www.springframework.org/schema/task"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+						   http://www.springframework.org/schema/beans/spring-beans.xsd
+						   http://www.springframework.org/schema/tx
+						   http://www.springframework.org/schema/tx/spring-tx.xsd
+						   http://www.springframework.org/schema/context 
+						   http://www.springframework.org/schema/context/spring-context-3.0.xsd
+						   http://www.springframework.org/schema/task
+						   http://www.springframework.org/schema/task/spring-task-3.0.xsd">
+	<!-- Activates annotation-based bean configuration -->
+	<context:annotation-config />
+	<!-- Scans for application @Components to deploy -->
+	<context:component-scan base-package="org.itri.ccma.tarsan" />
+
+	<!-- Defines a ThreadPoolTaskScheduler instance with configurable pool size. -->
+	<task:scheduler id="taskScheduler" pool-size="20" />
+	<!-- Defines our scheduled tasks -->
+	<bean id="BoUser" class="org.itri.ccma.tarsan.biz.BoUser" />
+
+	<!-- crontab arguments: minutes hours days months weekdays cmd -->
+
+	<!--<task:scheduled-tasks scheduler="taskScheduler"> -->
+	<!--<task:scheduled ref="BoUser" method="getWinningListWatchDog" cron="0 15 17 1/1 * ?" /> -->
+	<!-- cron="*/10 * * * * ?" />  -->
+	
+	<!--<task:scheduled ref="BoUser" method="syncAllCardInvWatchDog" -->
+	<!--cron="0 0 0/1 1/1 * ?" />
+	
+	<task:scheduled ref="BoUser" method="syncAllInvWatchDog"
+	cron="0 0/30 * 1/1 * ?" />
+
+	<task:scheduled ref="BoUser" method="checkWinningWatchDog"
+	cron="0 20 17 25 1/1 ?" />
+	-->
+	
+		
+	
+	<!-- 
+	<task:scheduled ref="PaaSPolling" method="checkPendingJobState"
+	cron="*/10 * * * * ?" />
+	<task:scheduled ref="PaaSPolling" method="checkFootageFetchingState"
+	cron="*/10 * * * * ?" />
+	<task:scheduled ref="PaaSPolling" method="checkCNHMSchedule"
+	cron="0/60 * * * * ?" />
+	<task:scheduled ref="PaaSPolling" method="checkANPRProcessingState"
+	cron="*/15 * * * * ?" />
+	<task:scheduled ref="PaaSPolling" method="checkCADProcessingState"
+	cron="0/30 * * * * ?" />
+	<task:scheduled ref="PaaSPolling" method="checkSummarizationProcessingState"
+	cron="0/15 * * * * ?" />
+	<task:scheduled ref="PaaSPolling" method="checkVideoMergeProcessingState"
+	cron="0/20 * * * * ?" />
+	<task:scheduled ref="PaaSPolling" method="checkPersonnelChangesWithinAD"
+	cron="0 15 02 * * ?" />
+
+
+	<task:scheduled ref="PaaSPolling" method="issueCertifiedVehicleTracking"
+	cron="0/60 * * * * ?" />
+	<task:scheduled ref="PaaSPolling" method="issueCertifiedLiveStreamAnalysis"
+	cron="50 * * * * ?" />
+	<task:scheduled ref="PaaSPolling" method="issueLiveStreamTermination"
+	cron="10 * * * * ?" />
+
+	</task:scheduled-tasks>
+	 -->
+
+</beans>

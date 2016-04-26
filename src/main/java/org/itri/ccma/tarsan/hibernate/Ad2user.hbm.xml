@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated Sep 3, 2015 11:03:17 AM by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.Ad2user" table="ad2user" optimistic-lock="version">
+        <id name="ad2userId" type="long">
+            <column name="ad2user_id" />
+            <generator class="assigned" />
+        </id>
+        <many-to-one name="ad" class="org.itri.ccma.tarsan.hibernate.Ad" fetch="select">
+            <column name="ad_id" not-null="true" />
+        </many-to-one>
+        <many-to-one name="users" class="org.itri.ccma.tarsan.hibernate.Users" fetch="select">
+            <column name="users_id" not-null="true" />
+        </many-to-one>
+        <property name="clickedFlag" type="boolean">
+            <column name="clicked_flag" not-null="true" />
+        </property>
+        <property name="closedFlag" type="boolean">
+            <column name="closed_flag" not-null="true" />
+        </property>
+        <property name="identifier" type="string">
+            <column name="identifier" length="128" />
+        </property>
+        <property name="createdDateTime" type="timestamp">
+            <column name="created_date_time" length="29" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

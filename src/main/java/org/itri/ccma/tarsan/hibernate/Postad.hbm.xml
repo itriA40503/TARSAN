@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 01:28:50 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.Postad" table="postad" schema="public">
+        <composite-id name="id" class="org.itri.ccma.tarsan.hibernate.PostadId">
+            <key-property name="postadId" type="long">
+                <column name="postad_id" />
+            </key-property>
+            <key-property name="buyadId" type="long">
+                <column name="buyad_id" />
+            </key-property>
+        </composite-id>
+        <many-to-one name="buyad" class="org.itri.ccma.tarsan.hibernate.Buyad" update="false" insert="false" fetch="select">
+            <column name="buyad_id" not-null="true" />
+        </many-to-one>
+        <property name="showtimes" type="string">
+            <column name="showtimes" length="128" />
+        </property>
+        <property name="clicktimes" type="string">
+            <column name="clicktimes" length="128" />
+        </property>
+        <property name="close" type="java.lang.Boolean">
+            <column name="close" />
+        </property>
+        <property name="createdate" type="timestamp">
+            <column name="createdate" length="29" not-null="true" />
+        </property>
+        <property name="updatetime" type="timestamp">
+            <column name="updatetime" length="29" />
+        </property>
+        <set name="logads" table="logad" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="postad_id" />
+                <column name="buyad_id" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Logad" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/3/21 ?U?? 01:28:50 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="org.itri.ccma.tarsan.hibernate.Exusergroup" table="exusergroup" schema="public">
+        <id name="groupId" type="long">
+            <column name="group_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="remark" type="string">
+            <column name="remark" length="128" />
+        </property>
+        <set name="exusers" table="exuser" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="group_id" />
+            </key>
+            <one-to-many class="org.itri.ccma.tarsan.hibernate.Exuser" />
+        </set>
+    </class>
+</hibernate-mapping>
