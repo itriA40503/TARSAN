@@ -35,8 +35,6 @@ public interface IAdExchange {
 	 */
 	public List<?> denyKeyword(String sessionId, String dKeyword);
 	
-	public List<?> ExUserloginForTest(String sessionId, String account, String password);
-		
 	//********************************************//
 	
 	//public List<?>exuserLog(String sessionId, long exuserId, String ip,String activity);

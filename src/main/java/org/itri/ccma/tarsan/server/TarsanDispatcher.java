@@ -434,10 +434,6 @@ public class TarsanDispatcher {
 		return exchange.denyKeyword(sessionId, dKeyword);
 	}
 	
-	public List<?> ExUserloginForTest(String sessionId, String account, String password){
-		return exchange.ExUserloginForTest(sessionId, account, password);
-	}
-	
 	/*-*************************************************************************************************
 	 *                                             AdPubilsh                                            *
 	 ***************************************************************************************************/

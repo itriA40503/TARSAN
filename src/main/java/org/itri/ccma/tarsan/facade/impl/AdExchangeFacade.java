@@ -28,12 +28,4 @@ public class AdExchangeFacade implements IAdExchange{
 		return BoExchange.getInstance().denyKeyword(sessionId, dKeyword);
 	}
 
-	@Override
-	public List<?> ExUserloginForTest(String sessionId, String account,
-			String password) {
-		// TODO Auto-generated method stub
-		return BoExchange.getInstance().ExUserloginForTest(sessionId, account, password);
-	}
-
-
 }
