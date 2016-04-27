@@ -23,11 +23,16 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.itri.ccma.tarsan.hibernate.Budgetlog;
+import org.itri.ccma.tarsan.hibernate.Budgetpool;
+import org.itri.ccma.tarsan.hibernate.Buyad;
 import org.itri.ccma.tarsan.hibernate.Logad;
 import org.itri.ccma.tarsan.hibernate.Postad;
 import org.itri.ccma.tarsan.hibernate.PostadId;
+import org.itri.ccma.tarsan.hibernate.Price;
 import org.itri.ccma.tarsan.hibernate.Runad;
 import org.itri.ccma.tarsan.hibernate.Userevent;
+import org.itri.ccma.tarsan.hibernate.Vacantad;
 import org.itri.ccma.tarsan.util.Configurations;
 import org.itri.ccma.tarsan.util.HibernateUtil;
 import org.itri.ccma.tarsan.util.MessageUtil;
@@ -107,7 +112,6 @@ public class BoAdPublish {
 					tx.commit();
 					
 					countPostAd(postadId, buyadId,"click");
-					
 					return resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
 							sessionId, "AdLog has been logged", "ClickCode", "0");					
 				}					
@@ -196,7 +200,7 @@ public class BoAdPublish {
 					logger.info("Type - "+tmp[1]);
 					logger.info("Link - "+extractLink[1]);
 					logger.info("pId - "+tmp[2]);
-					logger.info("bId - "+tmp[3]);
+					logger.info("bId - "+tmp[3]);					
 				}else{
 					resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
 							sessionId, "RunAd list generated", "size", list.size(), "Content", tmp[0],"Type",tmp[1],"pId",tmp[2],"bId",tmp[3]);
@@ -306,13 +310,13 @@ public class BoAdPublish {
 			int click = Integer.parseInt(lastad.getClicktimes());
 			click++;
 			logger.info("click : "+click);
-			lastad.setClicktimes(String.valueOf(click));
+			lastad.setClicktimes(String.valueOf(click));			
 		}
 		
 		lastad.setUpdatetime(currentTime);
 		session.persist(lastad);		
 		tx.commit();
-		
+		Charge(buyadId,ShowOrClick);
 		logger.info("Count postAd:"+postadId+","+buyadId+" : "+ShowOrClick);
 	}
 	
@@ -352,5 +356,93 @@ public class BoAdPublish {
 		}
 
 		return resultList;
+	}
+	
+	public void Charge(long buyadId, String ShowOrClick){
+		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Criteria criteria = session.createCriteria(Buyad.class);
+		criteria.add(Restrictions.eq("buyadId", buyadId));
+		Buyad buyAd = (Buyad)criteria.uniqueResult();
+		Vacantad findPrice = buyAd.getVacantad();
+		logger.info("BID:"+buyadId);
+		logger.info("VID:"+findPrice.getVacantId());
+		try{
+			Session session2 = HibernateUtil.getSessionFactory().openSession();
+			Transaction tx2 = session2.beginTransaction();
+			Criteria criteria2 = session2.createCriteria(Price.class);
+			criteria2.add(Restrictions.eq("vacantad.id", findPrice.getVacantId()));
+			Price price = (Price)criteria2.uniqueResult();
+			
+			logger.info("ID:"+price.getPriceId());
+			if(price.getPriceTotal().equals("0")){
+				logger.info(price.getPriceUnit()+" : "+price.getPriceNum());
+				BudgetCheckWithCount(buyadId,price.getPriceUnit(),price.getPriceNum(), ShowOrClick);
+			}else{
+				logger.info("TOTAL:"+price.getPriceTotal());				
+			}
+		}catch(Exception e){
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}
+		}		
+	}
+	
+	public void BudgetCheckWithCount(long buyadId, String unit, String num, String ShowOrClick){
+		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Date currentDate = new Date();
+		Transaction tx = session.beginTransaction();
+		Criteria criteria = session.createCriteria(Budgetpool.class);
+		criteria.add(Restrictions.eq("buyad.id", buyadId));
+		Budgetpool budget = (Budgetpool)criteria.uniqueResult();
+		long budgetId = budget.getBudgetId();
+		long currentBudget = budget.getBudgetCount();
+		long TotalBudget = budget.getBudgetTotal();
+		long thisCount = Long.parseLong(num);
+		if(ShowOrClick.equals(unit)){
+			if(TotalBudget>=(currentBudget+thisCount)){
+				budget.setBudgetCount(currentBudget+thisCount);
+				budget.setUpdatetime(currentDate);
+				BudgetLog(budget,TotalBudget,(currentBudget+thisCount));
+				session.persist(budget);		
+				tx.commit();
+			}else{
+				
+			}
+		}
+		
+	}
+	
+	public void BudgetLog(Budgetpool budget, long total, long counting){
+		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();		
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Date currentDate = new Date();
+		Transaction tx = session.beginTransaction();
+		Criteria criteria = session.createCriteria(Budgetlog.class);
+		Budgetlog budgetLog = new Budgetlog();
+		 
+		try {
+			budgetLog.setBudgetpool(budget);
+			budgetLog.setBudgetTotal(total);
+			budgetLog.setCounting(String.valueOf(counting));
+			budgetLog.setCreatedate(currentDate);
+			session.persist(budgetLog);		
+			tx.commit();
+			logger.info("BudgetLog");
+			logger.info(budget.getBudgetId());
+			logger.info(total);
+			logger.info(counting);
+			logger.info(currentDate);
+			
+		} catch (Exception e) {
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}			
+		} finally {
+			session.close();
+		}
 	}
 }
