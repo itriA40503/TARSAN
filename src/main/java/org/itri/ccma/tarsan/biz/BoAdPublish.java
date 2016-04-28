@@ -31,6 +31,7 @@ import org.itri.ccma.tarsan.hibernate.Postad;
 import org.itri.ccma.tarsan.hibernate.PostadId;
 import org.itri.ccma.tarsan.hibernate.Price;
 import org.itri.ccma.tarsan.hibernate.Runad;
+import org.itri.ccma.tarsan.hibernate.RunadId;
 import org.itri.ccma.tarsan.hibernate.Userevent;
 import org.itri.ccma.tarsan.hibernate.Vacantad;
 import org.itri.ccma.tarsan.util.Configurations;
@@ -316,8 +317,8 @@ public class BoAdPublish {
 		lastad.setUpdatetime(currentTime);
 		session.persist(lastad);		
 		tx.commit();
-		Charge(buyadId,ShowOrClick);
 		logger.info("Count postAd:"+postadId+","+buyadId+" : "+ShowOrClick);
+		Charge(buyadId,ShowOrClick);		
 	}
 	
 	public List<?> listRunAd(String sessionId){
@@ -365,8 +366,8 @@ public class BoAdPublish {
 		criteria.add(Restrictions.eq("buyadId", buyadId));
 		Buyad buyAd = (Buyad)criteria.uniqueResult();
 		Vacantad findPrice = buyAd.getVacantad();
-		logger.info("BID:"+buyadId);
-		logger.info("VID:"+findPrice.getVacantId());
+		//logger.info("BID:"+buyadId);
+		logger.info("vacantID:"+findPrice.getVacantId());
 		try{
 			Session session2 = HibernateUtil.getSessionFactory().openSession();
 			Transaction tx2 = session2.beginTransaction();
@@ -374,9 +375,9 @@ public class BoAdPublish {
 			criteria2.add(Restrictions.eq("vacantad.id", findPrice.getVacantId()));
 			Price price = (Price)criteria2.uniqueResult();
 			
-			logger.info("ID:"+price.getPriceId());
+			logger.info("priceID:"+price.getPriceId());
 			if(price.getPriceTotal().equals("0")){
-				logger.info(price.getPriceUnit()+" : "+price.getPriceNum());
+				logger.info(price.getPriceUnit()+" : $"+price.getPriceNum());
 				BudgetCheckWithCount(buyadId,price.getPriceUnit(),price.getPriceNum(), ShowOrClick);
 			}else{
 				logger.info("TOTAL:"+price.getPriceTotal());				
@@ -409,7 +410,7 @@ public class BoAdPublish {
 				session.persist(budget);		
 				tx.commit();
 			}else{
-				
+				CloseAd(buyadId);
 			}
 		}
 		
@@ -443,6 +444,44 @@ public class BoAdPublish {
 			}			
 		} finally {
 			session.close();
+		}
+	}
+	
+	public void CloseAd(long buyadId){
+		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();		
+		Date currentDate = new Date();	
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Session session2 = HibernateUtil.getSessionFactory().openSession();
+		try {
+			
+			Transaction tx = session.beginTransaction();
+			Criteria criteria = session.createCriteria(Runad.class);
+			criteria.add(Restrictions.eq("id.buyadId", buyadId));
+			Runad runAd = (Runad)criteria.uniqueResult();
+	
+			Transaction tx2 = session2.beginTransaction();
+			Criteria criteria2 = session2.createCriteria(Postad.class);
+			criteria2.add(Restrictions.eq("buyad.id", buyadId));
+			Postad postAd = (Postad)criteria2.uniqueResult();
+			
+			runAd.setClose(true);
+			runAd.setUpdatetime(currentDate);
+			tx.commit();
+			logger.info("#CloseAd#");
+			
+			postAd.setClose(true);			
+			postAd.setUpdatetime(currentDate);
+			tx2.commit();
+			logger.info("buyadId : "+buyadId);
+			
+		} catch (Exception e) {
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}			
+		} finally {
+			session.close();
+			session2.close();
 		}
 	}
 }
