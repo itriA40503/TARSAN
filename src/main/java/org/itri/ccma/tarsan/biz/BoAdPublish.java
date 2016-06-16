@@ -23,9 +23,11 @@ import org.hibernate.cfg.Configuration;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
+import org.itri.ccma.tarsan.biz.exceptions.LogicException;
 import org.itri.ccma.tarsan.hibernate.Budgetlog;
 import org.itri.ccma.tarsan.hibernate.Budgetpool;
 import org.itri.ccma.tarsan.hibernate.Buyad;
+import org.itri.ccma.tarsan.hibernate.Control;
 import org.itri.ccma.tarsan.hibernate.Logad;
 import org.itri.ccma.tarsan.hibernate.Postad;
 import org.itri.ccma.tarsan.hibernate.PostadId;
@@ -33,6 +35,7 @@ import org.itri.ccma.tarsan.hibernate.Price;
 import org.itri.ccma.tarsan.hibernate.Runad;
 import org.itri.ccma.tarsan.hibernate.RunadId;
 import org.itri.ccma.tarsan.hibernate.Userevent;
+import org.itri.ccma.tarsan.hibernate.Users;
 import org.itri.ccma.tarsan.hibernate.Vacantad;
 import org.itri.ccma.tarsan.util.Configurations;
 import org.itri.ccma.tarsan.util.HibernateUtil;
@@ -132,6 +135,7 @@ public class BoAdPublish {
 			if (Configurations.IS_DEBUG) {
 				logger.error("[ERROR] methodName: " + methodName);
 				logger.error("[ERROR] message: " + e.getMessage(), e);
+				
 			}
 			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
 					"0", e.getMessage());
@@ -484,4 +488,104 @@ public class BoAdPublish {
 			session2.close();
 		}
 	}
+
+	public List getUserNameByMac(String sessionId,String macAddr){
+		ArrayList resultList = new ArrayList();
+		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			Transaction tx = session.beginTransaction();
+			Criteria criteria = session.createCriteria(Control.class);
+			String matchStr= macAddr.replace(":", "");
+			criteria.add(Restrictions.eq("macAddr", matchStr));
+			Control con = (Control) criteria.uniqueResult();
+			
+			if (con == null){
+				throw new LogicException("MacAddres does not exist", Configurations.CODE_NOT_EXIST, "MacAddres", macAddr);
+			}else{				
+				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+						sessionId, con.getUserId());
+			}			
+			tx.commit();
+
+		} catch (Exception e) {
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
+					"0", e.getMessage());
+		} finally {
+			session.close();
+		}
+
+		return resultList;		
+	}
+	
+	public List getPageByName(String sessionId,String username){
+		ArrayList resultList = new ArrayList();
+		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			Transaction tx = session.beginTransaction();
+			Criteria criteria = session.createCriteria(Control.class);
+			criteria.add(Restrictions.eq("userId", username));
+			Control con = (Control) criteria.uniqueResult();
+			
+			if (con == null){
+				throw new LogicException("The Name does not exist", Configurations.CODE_NOT_EXIST, "Name", username);
+			}else{				
+				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+						sessionId, con.getPageUrl());
+			}			
+			tx.commit();
+
+		} catch (Exception e) {
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
+					"0", e.getMessage());
+		} finally {
+			session.close();
+		}
+
+		return resultList;		
+	}
+	
+//	public List setPage(String sessionId, String username, String url ){
+//		ArrayList resultList = new ArrayList();
+//		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+//		Session session = HibernateUtil.getSessionFactory().openSession();
+//		try {
+//			Transaction tx = session.beginTransaction();
+//			Criteria criteria = session.createCriteria(Control.class);
+//			criteria.add(Restrictions.eq("userId", username));
+//			Control con = (Control) criteria.uniqueResult();
+//			
+//			if (con == null){
+//				throw new LogicException("The Name does not exist", Configurations.CODE_NOT_EXIST, "Name", username);
+//			}else{
+//				
+//				con.setPageUrl(url);
+//				session.persist(con);
+//				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+//						sessionId, username+"'s page already save.");
+//			}
+//			tx.commit();
+//
+//		} catch (Exception e) {
+//			if (Configurations.IS_DEBUG) {
+//				logger.error("[ERROR] methodName: " + methodName);
+//				logger.error("[ERROR] message: " + e.getMessage(), e);
+//			}
+//			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
+//					"0", e.getMessage());
+//		} finally {
+//			session.close();
+//		}
+//
+//		return resultList;		
+//	}
 }

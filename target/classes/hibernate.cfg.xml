@@ -47,6 +47,7 @@
   <mapping class="org.itri.ccma.tarsan.hibernate.Exuser" />
   <mapping class="org.itri.ccma.tarsan.hibernate.Postad" />
   <mapping class="org.itri.ccma.tarsan.hibernate.Denydomain" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.Control" />
 
  </session-factory>
 </hibernate-configuration>

@@ -175,6 +175,12 @@ public class UserTest implements IUserTest {
 		// TODO Auto-generated method stub
 		return BoTest.getInstance().getDailyHoursDataByHost(sessionId, host);
 	}
+
+	@Override
+	public List<?> createPostad(String sessionId) {
+		// TODO Auto-generated method stub
+		return BoTest.getInstance().createPostad(sessionId);
+	}
 	
 	
 

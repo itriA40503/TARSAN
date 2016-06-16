@@ -203,4 +203,6 @@ public interface IUserTest {
 	public List<?>getDailyDataByDate(String sessionId, String date);
 	
 	public List<?>getDailyHoursDataByHost(String sessionId, String host);
+	
+	public List<?> createPostad(String sessionId);
 }

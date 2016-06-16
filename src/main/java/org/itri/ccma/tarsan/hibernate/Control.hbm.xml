@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/6/16 ?U?? 02:49:05 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="Control" table="control">
+        <id name="controlId" type="long">
+            <column name="control_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="userId" type="string">
+            <column name="user_id" length="128" />
+        </property>
+        <property name="macAddr" type="string">
+            <column name="mac_addr" length="12" />
+        </property>
+        <property name="pageUrl" type="string">
+            <column name="page_url" length="65535" />
+        </property>
+    </class>
+</hibernate-mapping>

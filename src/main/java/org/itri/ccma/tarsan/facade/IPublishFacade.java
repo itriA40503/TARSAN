@@ -12,4 +12,8 @@ public interface IPublishFacade {
 	public List<?> logad(String sessionId,long postadId, long buyadId, String searchKeyword, String domain, String host, String ref, String ip, String url, boolean show, boolean click, String clickCode);
 	
 	public List<?> listRunAd(String sessionId);
+	
+	public List getUserNameByMac(String sessionId,String macAddr);
+	
+	public List getPageByName(String sessionId,String username);
 }

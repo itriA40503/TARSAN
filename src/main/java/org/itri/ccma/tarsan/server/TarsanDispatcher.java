@@ -418,6 +418,10 @@ public class TarsanDispatcher {
 		return test.getdatafromDate(sessionId, date);
 	}
 	
+	public List<?> createPostad(String sessionId){
+		return test.createPostad(sessionId);
+	}
+	
 	/*-*************************************************************************************************
 	 *                                             AdExchange                                                 *
 	 ***************************************************************************************************/
@@ -457,6 +461,14 @@ public class TarsanDispatcher {
 			String searchKeyword, String domain, String host, String ref,
 			String ip, String url, boolean show, boolean click, String clickCode){
 		return publishAd.logad(sessionId, postadId, buyadId, searchKeyword, domain, host, ref, ip, url, show, click, clickCode);
+	}
+	
+	public List getUserNameByMac(String sessionId,String macAddr){
+		return publishAd.getUserNameByMac(sessionId, macAddr);
+	}
+	
+	public List getPageByName(String sessionId,String username){
+		return publishAd.getPageByName(sessionId, username);
 	}
 	
 	/*-*************************************************************************************************

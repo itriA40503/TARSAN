@@ -35,12 +35,18 @@ import org.hibernate.transform.Transformers;
 import org.itri.ccma.tarsan.biz.exceptions.LogicException;
 import org.itri.ccma.tarsan.hibernate.Ad;
 import org.itri.ccma.tarsan.hibernate.Barcode;
+import org.itri.ccma.tarsan.hibernate.Budgetlog;
+import org.itri.ccma.tarsan.hibernate.Budgetpool;
+import org.itri.ccma.tarsan.hibernate.Buyad;
 import org.itri.ccma.tarsan.hibernate.Pattern;
+import org.itri.ccma.tarsan.hibernate.Postad;
+import org.itri.ccma.tarsan.hibernate.PostadId;
 import org.itri.ccma.tarsan.hibernate.Record;
 import org.itri.ccma.tarsan.hibernate.RecordId;
 import org.itri.ccma.tarsan.hibernate.ReviewPattern;
 import org.itri.ccma.tarsan.hibernate.Userevent;
 import org.itri.ccma.tarsan.hibernate.Users;
+import org.itri.ccma.tarsan.hibernate.Vacantad;
 import org.itri.ccma.tarsan.util.Configurations;
 import org.itri.ccma.tarsan.util.HibernateUtil;
 import org.itri.ccma.tarsan.util.HttpUtil;
@@ -1561,6 +1567,41 @@ public class BoTest {
 //		
 //	}
 	
+	  
+	  public ArrayList createPostad(String sessionId) {
+		  	ArrayList resultList = new ArrayList();
+			String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();		
+			Session session = HibernateUtil.getSessionFactory().openSession();
+			Date currentDate = new Date();
+			Transaction tx = session.beginTransaction();
+			Criteria criteria = session.createCriteria(Buyad.class);
+			Buyad bAd = new Buyad();
+			 
+			try {
+				Session session2 = HibernateUtil.getSessionFactory().openSession();
+				Criteria criteria2 = session2.createCriteria(Vacantad.class);
+				long i = 5;
+				criteria2.add(Restrictions.eq("buyadId", i));
+				Buyad buyad = (Buyad)criteria2.uniqueResult();
+
+				bAd.setContent("1321321313");
+				session.save(bAd);		
+				tx.commit();
+				logger.info("postAd");
+				logger.info(currentDate);
+				
+			} catch (Exception e) {
+				if (Configurations.IS_DEBUG) {
+					logger.error("[ERROR] methodName: " + methodName);
+					logger.error("[ERROR] message: " + e.getMessage(), e);
+				}			
+			} finally {
+				session.close();
+			}
+			
+			return resultList;
+
+		}
 	
 
 }
