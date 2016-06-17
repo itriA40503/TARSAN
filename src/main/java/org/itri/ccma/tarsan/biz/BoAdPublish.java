@@ -501,12 +501,20 @@ public class BoAdPublish {
 			Control con = (Control) criteria.uniqueResult();
 			
 			if (con == null){
-				throw new LogicException("MacAddres does not exist", Configurations.CODE_NOT_EXIST, "MacAddres", macAddr);
+//				throw new LogicException("MacAddres does not exist", Configurations.CODE_NOT_EXIST, "MacAddres", macAddr);
+				Control newcon = new Control();
+				newcon.setMacAddr(matchStr);
+				newcon.setUserId("tmp");
+				newcon.setPageUrl("http://tarsanad.ddns.net/splash/TempPage.html,false");
+				session.save(newcon);
+				tx.commit();
+				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+						sessionId, "tmp", "Info", "This Not regular user.");
+				
 			}else{				
 				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
 						sessionId, con.getUserId());
-			}			
-			tx.commit();
+			}
 
 		} catch (Exception e) {
 			if (Configurations.IS_DEBUG) {
