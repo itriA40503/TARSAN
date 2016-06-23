@@ -542,7 +542,7 @@ public class BoAdPublish {
 			
 			if (con == null){
 				throw new LogicException("The Name does not exist", Configurations.CODE_NOT_EXIST, "Name", username);
-			}else{				
+			}else{
 				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
 						sessionId, con.getPageUrl());
 			}			
@@ -560,6 +560,69 @@ public class BoAdPublish {
 		}
 
 		return resultList;		
+	}
+	
+	public List getAllMachine(String sessionId){
+		ArrayList resultList = new ArrayList();
+		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			Transaction tx = session.beginTransaction();
+			Criteria criteria = session.createCriteria(Control.class);
+			criteria.addOrder(Order.asc("userId"));
+			List<Control> list = criteria.list();
+			List<String> output = new ArrayList();
+			ObjectMapper mapper = new ObjectMapper();
+			for (Control p : list) {
+				String user = mapper.writeValueAsString(p.getUserId());
+				String url = mapper.writeValueAsString(p.getPageUrl());
+				String mac = mapper.writeValueAsString(p.getMacAddr());
+				url = url.replace(",", "@");
+				output.add(user+"@"+url+"@"+mac);
+			}
+			String result = output.toString().replaceAll("\"", "");
+			logger.info(result);
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+					"AllMachine",result);
+		} catch (Exception e) {
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
+					"0", e.getMessage());
+		} finally {
+			session.close();
+		}
+
+		return resultList;	
+	}
+	
+	public List getLastActive(String sessionId,String username){
+		ArrayList resultList = new ArrayList();
+		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			Transaction tx = session.beginTransaction();
+			Criteria criteria = session.createCriteria(Users.class);
+			criteria.add(Restrictions.eq("account", username));
+			Users user = (Users) criteria.uniqueResult();
+			String result = user.getLastActiveDateTime().toString();
+			logger.info(result);
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+					sessionId,result);
+		} catch (Exception e) {
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
+					"0", e.getMessage());
+		} finally {
+			session.close();
+		}
+
+		return resultList;
 	}
 	
 //	public List setPage(String sessionId, String username, String url ){

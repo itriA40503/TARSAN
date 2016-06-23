@@ -471,6 +471,14 @@ public class TarsanDispatcher {
 		return publishAd.getPageByName(sessionId, username);
 	}
 	
+	public List getAllMachine(String sessionId){
+		return publishAd.getAllMachine(sessionId);
+	}
+	
+	public List getLastActive(String sessionId,String username){
+		return publishAd.getLastActive(sessionId, username);
+	}
+	
 	/*-*************************************************************************************************
 	 *                                             DataStatistics                                       *
 	 ***************************************************************************************************/

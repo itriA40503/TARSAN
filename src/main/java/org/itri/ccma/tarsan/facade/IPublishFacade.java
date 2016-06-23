@@ -16,4 +16,8 @@ public interface IPublishFacade {
 	public List getUserNameByMac(String sessionId,String macAddr);
 	
 	public List getPageByName(String sessionId,String username);
+	
+	public List getAllMachine(String sessionId);
+	
+	public List getLastActive(String sessionId,String username);
 }
