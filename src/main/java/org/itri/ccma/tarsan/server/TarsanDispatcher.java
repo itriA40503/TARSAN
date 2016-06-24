@@ -479,6 +479,10 @@ public class TarsanDispatcher {
 		return publishAd.getLastActive(sessionId, username);
 	}
 	
+	public List setPageUrl(String sessionId, String username, String url ){
+		return publishAd.setPageUrl(sessionId, username, url);
+	}
+	
 	/*-*************************************************************************************************
 	 *                                             DataStatistics                                       *
 	 ***************************************************************************************************/

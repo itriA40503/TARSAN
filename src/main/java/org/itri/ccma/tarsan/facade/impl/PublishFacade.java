@@ -63,4 +63,10 @@ public class PublishFacade implements IPublishFacade{
 		return BoAdPublish.getInstance().getLastActive(sessionId, username);		
 	}
 
+	@Override
+	public List setPageUrl(String sessionId, String username, String url) {
+		// TODO Auto-generated method stub
+		return BoAdPublish.getInstance().setPageUrl(sessionId, username, url);
+	}
+
 }

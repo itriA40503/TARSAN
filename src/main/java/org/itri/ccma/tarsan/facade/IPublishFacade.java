@@ -20,4 +20,6 @@ public interface IPublishFacade {
 	public List getAllMachine(String sessionId);
 	
 	public List getLastActive(String sessionId,String username);
+	
+	public List setPageUrl(String sessionId, String username, String url );
 }

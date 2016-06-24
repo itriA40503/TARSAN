@@ -625,38 +625,38 @@ public class BoAdPublish {
 		return resultList;
 	}
 	
-//	public List setPage(String sessionId, String username, String url ){
-//		ArrayList resultList = new ArrayList();
-//		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
-//		Session session = HibernateUtil.getSessionFactory().openSession();
-//		try {
-//			Transaction tx = session.beginTransaction();
-//			Criteria criteria = session.createCriteria(Control.class);
-//			criteria.add(Restrictions.eq("userId", username));
-//			Control con = (Control) criteria.uniqueResult();
-//			
-//			if (con == null){
-//				throw new LogicException("The Name does not exist", Configurations.CODE_NOT_EXIST, "Name", username);
-//			}else{
-//				
-//				con.setPageUrl(url);
-//				session.persist(con);
-//				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
-//						sessionId, username+"'s page already save.");
-//			}
-//			tx.commit();
-//
-//		} catch (Exception e) {
-//			if (Configurations.IS_DEBUG) {
-//				logger.error("[ERROR] methodName: " + methodName);
-//				logger.error("[ERROR] message: " + e.getMessage(), e);
-//			}
-//			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
-//					"0", e.getMessage());
-//		} finally {
-//			session.close();
-//		}
-//
-//		return resultList;		
-//	}
+	public List setPageUrl(String sessionId, String username, String url ){
+		ArrayList resultList = new ArrayList();
+		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			Transaction tx = session.beginTransaction();
+			Criteria criteria = session.createCriteria(Control.class);
+			criteria.add(Restrictions.eq("userId", username));
+			Control con = (Control) criteria.uniqueResult();
+			
+			if (con == null){
+				throw new LogicException("The Name does not exist", Configurations.CODE_NOT_EXIST, "Name", username);
+			}else{
+				
+				con.setPageUrl(url+",false");
+				session.update(con);
+				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+						sessionId, username+"'s page already update.","URL",url);
+			}
+			tx.commit();
+
+		} catch (Exception e) {
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
+					sessionId, e.getMessage());
+		} finally {
+			session.close();
+		}
+
+		return resultList;		
+	}
 }

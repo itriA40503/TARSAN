@@ -1,62 +1,62 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <testResults version="1.2">
-<httpSample t="64" lt="64" ts="1466670491970" s="true" lb="CreateUser" rc="200" rm="OK" tn="Server API combination 1-1" dt="text" by="420">
+<httpSample t="77" lt="77" ts="1466753201330" s="true" lb="CreateUser" rc="200" rm="OK" tn="Server API combination 1-1" dt="text" by="420">
   <assertionResult>
     <name>Assert Not 000</name>
     <failure>false</failure>
     <error>false</error>
   </assertionResult>
 </httpSample>
-<httpSample t="15" lt="15" ts="1466670492045" s="true" lb="Login" rc="200" rm="OK" tn="Server API combination 1-1" dt="text" by="319">
+<httpSample t="15" lt="15" ts="1466753201417" s="true" lb="Login" rc="200" rm="OK" tn="Server API combination 1-1" dt="text" by="319">
   <assertionResult>
     <name>Assert Not 000</name>
     <failure>false</failure>
     <error>false</error>
   </assertionResult>
 </httpSample>
-<httpSample t="15" lt="15" ts="1466670492061" s="true" lb="LogUserEvent" rc="200" rm="OK" tn="Server API combination 1-1" dt="text" by="366">
+<httpSample t="15" lt="15" ts="1466753201433" s="true" lb="LogUserEvent" rc="200" rm="OK" tn="Server API combination 1-1" dt="text" by="366">
   <assertionResult>
     <name>Assert Not 000</name>
     <failure>false</failure>
     <error>false</error>
   </assertionResult>
 </httpSample>
-<httpSample t="15" lt="15" ts="1466670492077" s="true" lb="LogUserEventICAP" rc="200" rm="OK" tn="Server API combination 1-1" dt="text" by="366">
+<httpSample t="14" lt="14" ts="1466753201449" s="true" lb="LogUserEventICAP" rc="200" rm="OK" tn="Server API combination 1-1" dt="text" by="366">
   <assertionResult>
     <name>Assert Not 000</name>
     <failure>false</failure>
     <error>false</error>
   </assertionResult>
 </httpSample>
-<httpSample t="16" lt="16" ts="1466670492093" s="true" lb="RetrieveAdsURL" rc="200" rm="OK" tn="Server API combination 1-1" dt="text" by="226">
+<httpSample t="14" lt="14" ts="1466753201464" s="true" lb="RetrieveAdsURL" rc="200" rm="OK" tn="Server API combination 1-1" dt="text" by="226">
   <assertionResult>
     <name>Assert Not 000</name>
     <failure>false</failure>
     <error>false</error>
   </assertionResult>
 </httpSample>
-<httpSample t="12" lt="12" ts="1466670492112" s="true" lb="createPattern" rc="200" rm="OK" tn="Server API combination 1-1" dt="text" by="2592">
+<httpSample t="10" lt="10" ts="1466753201480" s="true" lb="createPattern" rc="200" rm="OK" tn="Server API combination 1-1" dt="text" by="2592">
   <assertionResult>
     <name>Assert Not 000</name>
     <failure>false</failure>
     <error>false</error>
   </assertionResult>
 </httpSample>
-<httpSample t="29" lt="26" ts="1466670492126" s="true" lb="generatePattern" rc="200" rm="OK" tn="Server API combination 1-1" dt="text" by="24385">
+<httpSample t="28" lt="25" ts="1466753201491" s="true" lb="generatePattern" rc="200" rm="OK" tn="Server API combination 1-1" dt="text" by="24385">
   <assertionResult>
     <name>Assert Not 000</name>
     <failure>false</failure>
     <error>false</error>
   </assertionResult>
 </httpSample>
-<httpSample t="11" lt="10" ts="1466670492157" s="true" lb="createAds" rc="200" rm="OK" tn="Server API combination 1-1" dt="text" by="285">
+<httpSample t="9" lt="9" ts="1466753201520" s="true" lb="createAds" rc="200" rm="OK" tn="Server API combination 1-1" dt="text" by="285">
   <assertionResult>
     <name>Assert Not 000</name>
     <failure>false</failure>
     <error>false</error>
   </assertionResult>
 </httpSample>
-<httpSample t="17" lt="17" ts="1466670492168" s="true" lb="touchAds" rc="200" rm="OK" tn="Server API combination 1-1" dt="text" by="244">
+<httpSample t="14" lt="14" ts="1466753201530" s="true" lb="touchAds" rc="200" rm="OK" tn="Server API combination 1-1" dt="text" by="244">
   <assertionResult>
     <name>Assert Not 000</name>
     <failure>false</failure>
