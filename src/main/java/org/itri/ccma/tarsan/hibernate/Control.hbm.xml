@@ -17,5 +17,20 @@
         <property name="pageUrl" type="string">
             <column name="page_url" length="65535" />
         </property>
+        <property name="sessionTime" type="string">
+            <column name="session_time" length="5" />
+        </property>
+        <property name="owner" type="string">
+            <column name="owner" length="128" />
+        </property>
+        <property name="uploadFile" type="string">
+            <column name="upload_file" length="256" />
+        </property>
+        <property name="uploadType" type="string">
+            <column name="upload_type" length="256" />
+        </property>
+        <property name="lastActiveTime" type="timestamp">
+            <column name="last_active_time" length="29" />
+        </property>
     </class>
 </hibernate-mapping>

@@ -69,4 +69,9 @@ public class PublishFacade implements IPublishFacade{
 		return BoAdPublish.getInstance().setPageUrl(sessionId, username, url);
 	}
 
+	@Override
+	public List getSessionTimebyMac(String sessionId, String macAddr) {
+		// TODO Auto-generated method stub
+		return BoAdPublish.getInstance().getSessionTimebyMac(sessionId, macAddr);
+	}
 }

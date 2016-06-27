@@ -483,6 +483,10 @@ public class TarsanDispatcher {
 		return publishAd.setPageUrl(sessionId, username, url);
 	}
 	
+	public List getSessionTimebyMac(String sessionId,String macAddr){
+		return publishAd.getSessionTimebyMac(sessionId, macAddr);
+	}
+	
 	/*-*************************************************************************************************
 	 *                                             DataStatistics                                       *
 	 ***************************************************************************************************/

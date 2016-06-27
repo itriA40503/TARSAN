@@ -506,6 +506,7 @@ public class BoAdPublish {
 				newcon.setMacAddr(matchStr);
 				newcon.setUserId("tmp");
 				newcon.setPageUrl("http://tarsanad.ddns.net/splash/TempPage.html,false");
+				newcon.setSessionTime("300");
 				session.save(newcon);
 				tx.commit();
 				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
@@ -658,5 +659,38 @@ public class BoAdPublish {
 		}
 
 		return resultList;		
+	}
+	
+	public List getSessionTimebyMac(String sessionId,String macAddr){
+		ArrayList resultList = new ArrayList();
+		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			Transaction tx = session.beginTransaction();
+			Criteria criteria = session.createCriteria(Control.class);
+			String matchStr= macAddr.replace(":", "");
+			criteria.add(Restrictions.eq("macAddr", matchStr));
+			Control con = (Control) criteria.uniqueResult();
+			
+			if (con == null){
+				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_FORBIDDEN, methodName,
+						sessionId, "3600", "Info", "This Not regular user.");				
+			}else{				
+				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+						sessionId, con.getSessionTime());
+			}
+
+		} catch (Exception e) {
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
+					"0", e.getMessage());
+		} finally {
+			session.close();
+		}
+
+		return resultList;	
 	}
 }

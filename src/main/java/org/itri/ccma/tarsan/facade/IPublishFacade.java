@@ -22,4 +22,6 @@ public interface IPublishFacade {
 	public List getLastActive(String sessionId,String username);
 	
 	public List setPageUrl(String sessionId, String username, String url );
+	
+	public List getSessionTimebyMac(String sessionId,String macAddr);
 }
