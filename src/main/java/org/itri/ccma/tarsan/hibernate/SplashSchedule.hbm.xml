@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/7/1 ?W?? 11:08:27 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="SplashSchedule" table="splash_schedule">
+        <id name="splashScheduleId" type="long">
+            <column name="splash_schedule_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="scheduleTime" type="timestamp">
+            <column name="schedule_time" length="29" />
+        </property>
+        <property name="pageUrl" type="string">
+            <column name="page_url" length="65535" />
+        </property>
+        <property name="userId" type="string">
+            <column name="user_id" length="128" />
+        </property>
+        <property name="updateTime" type="timestamp">
+            <column name="update_time" length="29" />
+        </property>
+        <property name="createTime" type="timestamp">
+            <column name="create_time" length="29" />
+        </property>
+        <property name="del" type="boolean">
+            <column name="del" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

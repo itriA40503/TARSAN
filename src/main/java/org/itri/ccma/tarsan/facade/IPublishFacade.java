@@ -24,4 +24,10 @@ public interface IPublishFacade {
 	public List setPageUrl(String sessionId, String username, String url );
 	
 	public List getSessionTimebyMac(String sessionId,String macAddr);
+	
+	public List setSessionTime(String sessionId, String username, String time);
+	
+	public List setSplashSchedule(String sessionId, String username, String url, String date);
+	
+	public List getSplashSchedule(String sessionId);
 }

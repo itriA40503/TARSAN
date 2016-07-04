@@ -487,6 +487,18 @@ public class TarsanDispatcher {
 		return publishAd.getSessionTimebyMac(sessionId, macAddr);
 	}
 	
+	public List setSessionTime(String sessionId, String username, String time){
+		return publishAd.setSessionTime(sessionId, username, time);
+	}
+	
+	public List setSplashSchedule(String sessionId, String username, String url, String date){
+		return publishAd.setSplashSchedule(sessionId, username, url, date);
+	}
+	
+	public List getSplashSchedule(String sessionId){
+		return publishAd.getSplashSchedule(sessionId);
+	}
+	
 	/*-*************************************************************************************************
 	 *                                             DataStatistics                                       *
 	 ***************************************************************************************************/

@@ -5,6 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Collections;
 import java.util.Date;
 import java.util.List;
@@ -34,6 +35,7 @@ import org.itri.ccma.tarsan.hibernate.PostadId;
 import org.itri.ccma.tarsan.hibernate.Price;
 import org.itri.ccma.tarsan.hibernate.Runad;
 import org.itri.ccma.tarsan.hibernate.RunadId;
+import org.itri.ccma.tarsan.hibernate.SplashSchedule;
 import org.itri.ccma.tarsan.hibernate.Userevent;
 import org.itri.ccma.tarsan.hibernate.Users;
 import org.itri.ccma.tarsan.hibernate.Vacantad;
@@ -578,8 +580,9 @@ public class BoAdPublish {
 				String user = mapper.writeValueAsString(p.getUserId());
 				String url = mapper.writeValueAsString(p.getPageUrl());
 				String mac = mapper.writeValueAsString(p.getMacAddr());
+				String time = mapper.writeValueAsString(p.getSessionTime());
 				url = url.replace(",", "@");
-				output.add(user+"@"+url+"@"+mac);
+				output.add(user+"@"+url+"@"+mac+"@"+time);
 			}
 			String result = output.toString().replaceAll("\"", "");
 			logger.info(result);
@@ -693,4 +696,151 @@ public class BoAdPublish {
 
 		return resultList;	
 	}
+	
+	public List setSessionTime(String sessionId, String username, String time){
+		ArrayList resultList = new ArrayList();
+		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			Transaction tx = session.beginTransaction();
+			Criteria criteria = session.createCriteria(Control.class);
+			criteria.add(Restrictions.eq("userId", username));
+			Control con = (Control) criteria.uniqueResult();
+			
+			if (con == null){
+				throw new LogicException("The Name does not exist", Configurations.CODE_NOT_EXIST, "Name", username);
+			}else{
+				
+				if(time.matches("[-+]?\\d*\\.?\\d+")){
+					con.setSessionTime(time);
+					session.update(con);
+					resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+							sessionId, username+"'s SessionTime already update.","SessionTime",time);
+				}  else{
+					resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+							sessionId, "String is not number.");
+				}
+			}
+			tx.commit();
+
+		} catch (Exception e) {
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
+					sessionId, e.getMessage());
+		} finally {
+			session.close();
+		}
+
+		return resultList;
+	}
+	
+	public List setSplashSchedule(String sessionId, String username, String url, String date){
+		ArrayList resultList = new ArrayList();
+		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Date currentDate = new Date();
+		try {
+			Transaction tx = session.beginTransaction();
+			
+			SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm");
+			Date scheduleDate = originalFormat.parse(date.toString());
+			
+			Criteria criteria = session.createCriteria(SplashSchedule.class);
+			criteria.add(Restrictions.eq("del", false));
+			criteria.add(Restrictions.eq("scheduleTime", scheduleDate));
+			criteria.add(Restrictions.eq("userId", username));
+			if(criteria.uniqueResult()!=null){
+				SplashSchedule schedule = (SplashSchedule)criteria.uniqueResult();
+				schedule.setScheduleTime(scheduleDate);
+				schedule.setPageUrl(url);
+				schedule.setUpdateTime(currentDate);
+				session.update(schedule);
+				tx.commit();
+				
+				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+						sessionId, username+"'s Schedule already update.","Schedule Time",date, "UpdateTime",  currentDate);
+				
+			}else{
+				SplashSchedule schedule = new SplashSchedule();
+				schedule.setScheduleTime(scheduleDate);
+				schedule.setPageUrl(url);
+				schedule.setDel(false);
+				schedule.setUserId(username);
+				schedule.setCreateTime(currentDate);
+				schedule.setUpdateTime(currentDate);
+				session.save(schedule);
+				tx.commit();
+				
+				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+						sessionId, username+"'s Schedule already create.","Schedule Time",date, "CreateTime",  currentDate);
+			}			
+		} catch (Exception e) {
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
+					sessionId, e.getMessage());
+		} finally {
+			session.close();
+		}
+		return resultList;
+	}
+	
+	public List getSplashSchedule(String sessionId){
+		ArrayList resultList = new ArrayList();
+		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Date currentDate = new Date();
+		Calendar cal = Calendar.getInstance();
+		SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm");
+		logger.info(originalFormat.format(cal.getTime()));
+		String dateStr =originalFormat.format(cal.getTime());
+		
+		try {			
+			Transaction tx = session.beginTransaction();
+			Criteria criteria = session.createCriteria(SplashSchedule.class);
+			Date date = originalFormat.parse(dateStr.toString());
+			criteria.add(Restrictions.eq("del", false));
+			criteria.add(Restrictions.eq("scheduleTime", date));
+			List<SplashSchedule> list = criteria.list();
+			List<String> output = new ArrayList();			
+			ObjectMapper mapper = new ObjectMapper();
+			String userStr = "";
+			String urlStr = "";
+			for (SplashSchedule p : list) {
+				String user = mapper.writeValueAsString(p.getUserId());
+				if(userStr.equals("")){
+					userStr = user;
+				}else{
+					userStr = userStr + "@" + user;
+				}
+				String url = mapper.writeValueAsString(p.getPageUrl());
+				if(urlStr.equals("")){
+					urlStr = url;
+				}else{
+					urlStr = urlStr + "@" + url;
+				}
+			}
+			userStr = userStr.replaceAll("\"", "");
+			urlStr = urlStr.replaceAll("\"", "");
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+					sessionId,"ok","users",userStr,"urls",urlStr);
+		} catch (Exception e) {
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
+					"0", e.getMessage());
+		} finally {
+			session.close();
+		}
+
+		return resultList;	
+	}
+	
 }

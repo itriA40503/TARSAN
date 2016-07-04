@@ -74,4 +74,25 @@ public class PublishFacade implements IPublishFacade{
 		// TODO Auto-generated method stub
 		return BoAdPublish.getInstance().getSessionTimebyMac(sessionId, macAddr);
 	}
+
+	@Override
+	public List setSessionTime(String sessionId, String username, String time) {
+		// TODO Auto-generated method stub
+		return BoAdPublish.getInstance().setSessionTime(sessionId, username, time);
+	}
+
+	@Override
+	public List setSplashSchedule(String sessionId, String username, String url,
+			String date) {
+		// TODO Auto-generated method stub
+		return BoAdPublish.getInstance().setSplashSchedule(sessionId, username, url, date);
+	}
+
+	@Override
+	public List getSplashSchedule(String sessionId) {
+		// TODO Auto-generated method stub
+		return BoAdPublish.getInstance().getSplashSchedule(sessionId);
+	}
+	
+	
 }
