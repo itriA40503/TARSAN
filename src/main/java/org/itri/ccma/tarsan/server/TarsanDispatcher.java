@@ -499,6 +499,14 @@ public class TarsanDispatcher {
 		return publishAd.getSplashSchedule(sessionId);
 	}
 	
+	public List delSplashSchedule(String sessionId, String username,  String date){
+		return publishAd.delSplashSchedule(sessionId, username, date);
+	}
+	
+	public List getScheduleByUsername(String sessionId, String username){
+		return publishAd.getScheduleByUsername(sessionId, username);
+	}
+	
 	/*-*************************************************************************************************
 	 *                                             DataStatistics                                       *
 	 ***************************************************************************************************/

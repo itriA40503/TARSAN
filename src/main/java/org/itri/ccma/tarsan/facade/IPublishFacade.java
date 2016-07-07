@@ -30,4 +30,8 @@ public interface IPublishFacade {
 	public List setSplashSchedule(String sessionId, String username, String url, String date);
 	
 	public List getSplashSchedule(String sessionId);
+	
+	public List delSplashSchedule(String sessionId, String username,  String date);
+	
+	public List getScheduleByUsername(String sessionId, String username);
 }

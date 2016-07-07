@@ -509,7 +509,7 @@ public class BoAdPublish {
 				newcon.setUserId("tmp");
 				newcon.setPageUrl("http://tarsanad.ddns.net/splash/TempPage.html,false");
 				newcon.setSessionTime("300");
-				session.save(newcon);
+				session.persist(newcon);
 				tx.commit();
 				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
 						sessionId, "tmp", "Info", "This Not regular user.");
@@ -811,7 +811,7 @@ public class BoAdPublish {
 			ObjectMapper mapper = new ObjectMapper();
 			String userStr = "";
 			String urlStr = "";
-			for (SplashSchedule p : list) {
+			for (SplashSchedule p : list) {				
 				String user = mapper.writeValueAsString(p.getUserId());
 				if(userStr.equals("")){
 					userStr = user;
@@ -841,6 +841,97 @@ public class BoAdPublish {
 		}
 
 		return resultList;	
+	}
+	
+	public List delSplashSchedule(String sessionId, String username,  String date){
+		ArrayList resultList = new ArrayList();
+		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Date currentDate = new Date();
+		try {
+			Transaction tx = session.beginTransaction();			
+			SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm");
+			Date scheduleDate = originalFormat.parse(date.toString());			
+			Criteria criteria = session.createCriteria(SplashSchedule.class);
+			
+			criteria.add(Restrictions.eq("scheduleTime", scheduleDate));
+			criteria.add(Restrictions.eq("userId", username));
+			if(criteria.uniqueResult()!=null){
+				SplashSchedule schedule = (SplashSchedule)criteria.uniqueResult();
+				schedule.setDel(true);
+				schedule.setUpdateTime(currentDate);
+				session.update(schedule);
+				tx.commit();				
+				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+						sessionId, username+"'s Schedule already delete.","Delete Time",date);
+			}else{				
+				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+						sessionId, username+"or this schedule time is not found.");
+			}			
+		} catch (Exception e) {
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
+					sessionId, e.getMessage());
+		} finally {
+			session.close();
+		}
+		return resultList;
+	}
+	
+	public List getScheduleByUsername(String sessionId, String username){
+		ArrayList resultList = new ArrayList();
+		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Date currentDate = new Date();
+		try {
+			Transaction tx = session.beginTransaction();			
+			Criteria criteria = session.createCriteria(SplashSchedule.class);
+			criteria.add(Restrictions.eq("userId", username));
+			criteria.addOrder(Order.asc("scheduleTime"));
+			List<SplashSchedule> list = criteria.list();
+			ObjectMapper mapper = new ObjectMapper();
+
+			String schedules = "";
+			String urls = "";
+
+			for (SplashSchedule p : list) {
+				String schedule = mapper.writeValueAsString(p.getScheduleTime());
+				String url = mapper.writeValueAsString(p.getPageUrl());						
+				if(schedules.equals("")){
+					schedules = schedule;
+				}else{
+					schedules = schedules + "@" + schedule ;
+				}
+				
+				if(urls.equals("")){
+					urls = url;
+				}else{
+					urls = urls + "@" + url ;
+				}
+			}
+			urls = urls.replaceAll("\"", "");
+			if(!criteria.list().isEmpty()){
+				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+						sessionId, "", "schedule", schedules, "url", urls, "currentTime",currentDate);	
+			}else{
+				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
+						sessionId, "Not found schedules.");
+			}
+			
+		} catch (Exception e) {
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
+					sessionId, e.getMessage());
+		} finally {
+			session.close();
+		}
+		return resultList;
 	}
 	
 }

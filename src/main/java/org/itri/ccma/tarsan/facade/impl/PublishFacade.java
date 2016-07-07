@@ -93,6 +93,18 @@ public class PublishFacade implements IPublishFacade{
 		// TODO Auto-generated method stub
 		return BoAdPublish.getInstance().getSplashSchedule(sessionId);
 	}
+
+	@Override
+	public List delSplashSchedule(String sessionId, String username, String date) {
+		// TODO Auto-generated method stub
+		return BoAdPublish.getInstance().delSplashSchedule(sessionId, username, date);
+	}
+
+	@Override
+	public List getScheduleByUsername(String sessionId, String username) {
+		// TODO Auto-generated method stub
+		return BoAdPublish.getInstance().getScheduleByUsername(sessionId, username);
+	}
 	
 	
 }
