@@ -1,66 +1,65 @@
-2016/07/07 13:46:28 INFO  - jmeter.util.JMeterUtils: Setting Locale to zh_TW 
-2016/07/07 13:46:28 INFO  - jmeter.JMeter: Loading user properties from: D:\clone\TARSAN\target\jmeter\bin\user.properties 
-2016/07/07 13:46:28 INFO  - jmeter.JMeter: Loading system properties from: D:\clone\TARSAN\target\jmeter\bin\system.properties 
-2016/07/07 13:46:28 INFO  - jmeter.JMeter: Copyright (c) 1998-2014 The Apache Software Foundation 
-2016/07/07 13:46:28 INFO  - jmeter.JMeter: Version 2.11 r1554548 
-2016/07/07 13:46:28 INFO  - jmeter.JMeter: java.version=1.8.0_65 
-2016/07/07 13:46:28 INFO  - jmeter.JMeter: java.vm.name=Java HotSpot(TM) 64-Bit Server VM 
-2016/07/07 13:46:28 INFO  - jmeter.JMeter: os.name=Windows 7 
-2016/07/07 13:46:28 INFO  - jmeter.JMeter: os.arch=amd64 
-2016/07/07 13:46:28 INFO  - jmeter.JMeter: os.version=6.1 
-2016/07/07 13:46:28 INFO  - jmeter.JMeter: file.encoding=MS950 
-2016/07/07 13:46:28 INFO  - jmeter.JMeter: Default Locale=中文 (台灣) 
-2016/07/07 13:46:28 INFO  - jmeter.JMeter: JMeter  Locale=中文 (台灣) 
-2016/07/07 13:46:28 INFO  - jmeter.JMeter: JMeterHome=D:\clone\TARSAN\target\jmeter 
-2016/07/07 13:46:28 INFO  - jmeter.JMeter: user.dir  =D:\clone\TARSAN\target\jmeter\bin 
-2016/07/07 13:46:28 INFO  - jmeter.JMeter: PWD       =D:\clone\TARSAN\target\jmeter\bin 
-2016/07/07 13:46:28 INFO  - jmeter.JMeter: IP: 140.96.29.77 Name: 52-0A40503-01 FullName: 140.96.29.77 
-2016/07/07 13:46:28 INFO  - jmeter.services.FileServer: Default base='D:\clone\TARSAN\target\jmeter\bin' 
-2016/07/07 13:46:28 INFO  - jmeter.services.FileServer: Set new base='D:\clone\TARSAN\src\test\jmeter' 
-2016/07/07 13:46:28 INFO  - jmeter.JMeter: Loading file: D:\clone\TARSAN\src\test\jmeter\TarsanJmeter.jmx 
-2016/07/07 13:46:28 INFO  - jmeter.save.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2 
-2016/07/07 13:46:28 INFO  - jmeter.save.SaveService: Using SaveService properties file encoding UTF-8 
-2016/07/07 13:46:28 INFO  - jmeter.save.SaveService: Using SaveService properties version 2.6 
-2016/07/07 13:46:28 INFO  - jmeter.save.SaveService: Using SaveService properties file version 1554411 
-2016/07/07 13:46:28 INFO  - jmeter.save.SaveService: All converter versions present and correct 
-2016/07/07 13:46:28 INFO  - jmeter.protocol.http.control.CookieManager: Settings: Delete null: true Check: true Allow variable: true Save: false Prefix: COOKIE_ 
-2016/07/07 13:46:28 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Cannot find .className property for htmlParser, using default 
-2016/07/07 13:46:28 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/html is  
-2016/07/07 13:46:28 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for application/xhtml+xml is  
-2016/07/07 13:46:28 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for application/xml is  
-2016/07/07 13:46:28 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/xml is  
-2016/07/07 13:46:28 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser 
-2016/07/07 13:46:28 INFO  - jorphan.exec.KeyToolUtils: keytool found at 'keytool' 
-2016/07/07 13:46:28 INFO  - jmeter.protocol.http.proxy.ProxyControl: HTTP(S) Test Script Recorder SSL Proxy will use keys that support embedded 3rd party resources in file D:\clone\TARSAN\target\jmeter\bin\proxyserver.jks 
-2016/07/07 13:46:28 INFO  - jmeter.JMeter: Creating summariser <summary> 
-2016/07/07 13:46:28 INFO  - jmeter.engine.StandardJMeterEngine: Listeners will be started after enabling running version 
-2016/07/07 13:46:28 INFO  - jmeter.engine.StandardJMeterEngine: To revert to the earlier behaviour, define jmeterengine.startlistenerslater=false 
-2016/07/07 13:46:28 INFO  - jmeter.engine.StandardJMeterEngine: Running the test! 
-2016/07/07 13:46:28 INFO  - jmeter.samplers.SampleEvent: List of sample_variables: [] 
-2016/07/07 13:46:28 INFO  - jmeter.samplers.SampleEvent: List of sample_variables: [] 
-2016/07/07 13:46:28 INFO  - jmeter.engine.util.CompoundVariable: Note: Function class names must contain the string: '.functions.' 
-2016/07/07 13:46:28 INFO  - jmeter.engine.util.CompoundVariable: Note: Function class names must not contain the string: '.gui.' 
-2016/07/07 13:46:28 INFO  - jmeter.JMeter: 執行測試 (1467870388881) 
-2016/07/07 13:46:28 INFO  - jmeter.engine.StandardJMeterEngine: Starting ThreadGroup: 1 : Server API combination 
-2016/07/07 13:46:28 INFO  - jmeter.engine.StandardJMeterEngine: Starting 1 threads for group Server API combination. 
-2016/07/07 13:46:28 INFO  - jmeter.engine.StandardJMeterEngine: Thread will continue on error 
-2016/07/07 13:46:28 INFO  - jmeter.threads.ThreadGroup: Starting thread group number 1 threads 1 ramp-up 1 perThread 1000.0 delayedStart=false 
-2016/07/07 13:46:28 INFO  - jmeter.threads.JMeterThread: jmeterthread.startearlier=true (see jmeter.properties) 
-2016/07/07 13:46:28 INFO  - jmeter.threads.JMeterThread: Running PostProcessors in forward order 
-2016/07/07 13:46:28 INFO  - jmeter.threads.ThreadGroup: Started thread group number 1 
-2016/07/07 13:46:28 INFO  - jmeter.engine.StandardJMeterEngine: All thread groups have been started 
-2016/07/07 13:46:29 INFO  - jmeter.threads.JMeterThread: Thread started: Server API combination 1-1 
-2016/07/07 13:46:29 INFO  - jmeter.protocol.http.sampler.HTTPHCAbstractImpl: Local host = 52-0A40503-01 
-2016/07/07 13:46:29 INFO  - jmeter.protocol.http.sampler.HTTPHC4Impl: HTTP request retry count = 0 
-2016/07/07 13:46:29 INFO  - jmeter.protocol.http.sampler.HTTPHC4Impl: Setting up HTTPS TrustAll scheme 
-2016/07/07 13:46:29 INFO  - jmeter.util.JsseSSLManager: Using default SSL protocol: TLS 
-2016/07/07 13:46:29 INFO  - jmeter.util.JsseSSLManager: SSL session context: per-thread 
-2016/07/07 13:46:29 INFO  - jmeter.samplers.SampleResult: Note: Sample TimeStamps are START times 
-2016/07/07 13:46:29 INFO  - jmeter.samplers.SampleResult: sampleresult.default.encoding is set to ISO-8859-1 
-2016/07/07 13:46:29 INFO  - jmeter.samplers.SampleResult: sampleresult.useNanoTime=true 
-2016/07/07 13:46:29 INFO  - jmeter.samplers.SampleResult: sampleresult.nanoThreadSleep=5000 
-2016/07/07 13:46:30 INFO  - jmeter.reporters.Summariser: summary +      1 in     1s =    1.4/s Avg:   702 Min:   702 Max:   702 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0 
-2016/07/07 13:46:30 INFO  - jmeter.threads.JMeterThread: Thread finished: Server API combination 1-1 
-2016/07/07 13:46:30 INFO  - jmeter.engine.StandardJMeterEngine: Notifying test listeners of end of test 
-2016/07/07 13:46:30 INFO  - jmeter.reporters.Summariser: summary +      8 in   0.1s =   61.5/s Avg:    15 Min:     9 Max:    27 Err:     0 (0.00%) Active: 0 Started: 1 Finished: 1 
-2016/07/07 13:46:30 INFO  - jmeter.reporters.Summariser: summary =      9 in     1s =   10.6/s Avg:    91 Min:     9 Max:   702 Err:     0 (0.00%) 
+2016/07/07 15:23:28 INFO  - jmeter.util.JMeterUtils: Setting Locale to zh_TW 
+2016/07/07 15:23:28 INFO  - jmeter.JMeter: Loading user properties from: D:\clone\TARSAN\target\jmeter\bin\user.properties 
+2016/07/07 15:23:28 INFO  - jmeter.JMeter: Loading system properties from: D:\clone\TARSAN\target\jmeter\bin\system.properties 
+2016/07/07 15:23:28 INFO  - jmeter.JMeter: Copyright (c) 1998-2014 The Apache Software Foundation 
+2016/07/07 15:23:28 INFO  - jmeter.JMeter: Version 2.11 r1554548 
+2016/07/07 15:23:28 INFO  - jmeter.JMeter: java.version=1.8.0_65 
+2016/07/07 15:23:28 INFO  - jmeter.JMeter: java.vm.name=Java HotSpot(TM) 64-Bit Server VM 
+2016/07/07 15:23:28 INFO  - jmeter.JMeter: os.name=Windows 7 
+2016/07/07 15:23:28 INFO  - jmeter.JMeter: os.arch=amd64 
+2016/07/07 15:23:28 INFO  - jmeter.JMeter: os.version=6.1 
+2016/07/07 15:23:28 INFO  - jmeter.JMeter: file.encoding=MS950 
+2016/07/07 15:23:28 INFO  - jmeter.JMeter: Default Locale=中文 (台灣) 
+2016/07/07 15:23:28 INFO  - jmeter.JMeter: JMeter  Locale=中文 (台灣) 
+2016/07/07 15:23:28 INFO  - jmeter.JMeter: JMeterHome=D:\clone\TARSAN\target\jmeter 
+2016/07/07 15:23:28 INFO  - jmeter.JMeter: user.dir  =D:\clone\TARSAN\target\jmeter\bin 
+2016/07/07 15:23:28 INFO  - jmeter.JMeter: PWD       =D:\clone\TARSAN\target\jmeter\bin 
+2016/07/07 15:23:28 INFO  - jmeter.JMeter: IP: 140.96.29.77 Name: 52-0A40503-01 FullName: 140.96.29.77 
+2016/07/07 15:23:28 INFO  - jmeter.services.FileServer: Default base='D:\clone\TARSAN\target\jmeter\bin' 
+2016/07/07 15:23:28 INFO  - jmeter.services.FileServer: Set new base='D:\clone\TARSAN\src\test\jmeter' 
+2016/07/07 15:23:28 INFO  - jmeter.JMeter: Loading file: D:\clone\TARSAN\src\test\jmeter\TarsanJmeter.jmx 
+2016/07/07 15:23:28 INFO  - jmeter.save.SaveService: Testplan (JMX) version: 2.2. Testlog (JTL) version: 2.2 
+2016/07/07 15:23:28 INFO  - jmeter.save.SaveService: Using SaveService properties file encoding UTF-8 
+2016/07/07 15:23:28 INFO  - jmeter.save.SaveService: Using SaveService properties version 2.6 
+2016/07/07 15:23:28 INFO  - jmeter.save.SaveService: Using SaveService properties file version 1554411 
+2016/07/07 15:23:28 INFO  - jmeter.save.SaveService: All converter versions present and correct 
+2016/07/07 15:23:28 INFO  - jmeter.protocol.http.control.CookieManager: Settings: Delete null: true Check: true Allow variable: true Save: false Prefix: COOKIE_ 
+2016/07/07 15:23:28 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Cannot find .className property for htmlParser, using default 
+2016/07/07 15:23:28 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/html is  
+2016/07/07 15:23:28 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for application/xhtml+xml is  
+2016/07/07 15:23:28 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for application/xml is  
+2016/07/07 15:23:28 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/xml is  
+2016/07/07 15:23:28 INFO  - jmeter.protocol.http.sampler.HTTPSamplerBase: Parser for text/vnd.wap.wml is org.apache.jmeter.protocol.http.parser.RegexpHTMLParser 
+2016/07/07 15:23:28 INFO  - jorphan.exec.KeyToolUtils: keytool found at 'keytool' 
+2016/07/07 15:23:28 INFO  - jmeter.protocol.http.proxy.ProxyControl: HTTP(S) Test Script Recorder SSL Proxy will use keys that support embedded 3rd party resources in file D:\clone\TARSAN\target\jmeter\bin\proxyserver.jks 
+2016/07/07 15:23:28 INFO  - jmeter.JMeter: Creating summariser <summary> 
+2016/07/07 15:23:28 INFO  - jmeter.engine.StandardJMeterEngine: Listeners will be started after enabling running version 
+2016/07/07 15:23:28 INFO  - jmeter.engine.StandardJMeterEngine: To revert to the earlier behaviour, define jmeterengine.startlistenerslater=false 
+2016/07/07 15:23:28 INFO  - jmeter.engine.StandardJMeterEngine: Running the test! 
+2016/07/07 15:23:28 INFO  - jmeter.samplers.SampleEvent: List of sample_variables: [] 
+2016/07/07 15:23:28 INFO  - jmeter.samplers.SampleEvent: List of sample_variables: [] 
+2016/07/07 15:23:28 INFO  - jmeter.engine.util.CompoundVariable: Note: Function class names must contain the string: '.functions.' 
+2016/07/07 15:23:28 INFO  - jmeter.engine.util.CompoundVariable: Note: Function class names must not contain the string: '.gui.' 
+2016/07/07 15:23:29 INFO  - jmeter.JMeter: 執行測試 (1467876209070) 
+2016/07/07 15:23:29 INFO  - jmeter.engine.StandardJMeterEngine: Starting ThreadGroup: 1 : Server API combination 
+2016/07/07 15:23:29 INFO  - jmeter.engine.StandardJMeterEngine: Starting 1 threads for group Server API combination. 
+2016/07/07 15:23:29 INFO  - jmeter.engine.StandardJMeterEngine: Thread will continue on error 
+2016/07/07 15:23:29 INFO  - jmeter.threads.ThreadGroup: Starting thread group number 1 threads 1 ramp-up 1 perThread 1000.0 delayedStart=false 
+2016/07/07 15:23:29 INFO  - jmeter.threads.JMeterThread: jmeterthread.startearlier=true (see jmeter.properties) 
+2016/07/07 15:23:29 INFO  - jmeter.threads.JMeterThread: Running PostProcessors in forward order 
+2016/07/07 15:23:29 INFO  - jmeter.threads.ThreadGroup: Started thread group number 1 
+2016/07/07 15:23:29 INFO  - jmeter.engine.StandardJMeterEngine: All thread groups have been started 
+2016/07/07 15:23:29 INFO  - jmeter.threads.JMeterThread: Thread started: Server API combination 1-1 
+2016/07/07 15:23:29 INFO  - jmeter.protocol.http.sampler.HTTPHCAbstractImpl: Local host = 52-0A40503-01 
+2016/07/07 15:23:29 INFO  - jmeter.protocol.http.sampler.HTTPHC4Impl: HTTP request retry count = 0 
+2016/07/07 15:23:29 INFO  - jmeter.protocol.http.sampler.HTTPHC4Impl: Setting up HTTPS TrustAll scheme 
+2016/07/07 15:23:29 INFO  - jmeter.util.JsseSSLManager: Using default SSL protocol: TLS 
+2016/07/07 15:23:29 INFO  - jmeter.util.JsseSSLManager: SSL session context: per-thread 
+2016/07/07 15:23:29 INFO  - jmeter.samplers.SampleResult: Note: Sample TimeStamps are START times 
+2016/07/07 15:23:29 INFO  - jmeter.samplers.SampleResult: sampleresult.default.encoding is set to ISO-8859-1 
+2016/07/07 15:23:29 INFO  - jmeter.samplers.SampleResult: sampleresult.useNanoTime=true 
+2016/07/07 15:23:29 INFO  - jmeter.samplers.SampleResult: sampleresult.nanoThreadSleep=5000 
+2016/07/07 15:23:30 INFO  - jmeter.reporters.Summariser: summary +      9 in     1s =   17.8/s Avg:    53 Min:     5 Max:   384 Err:     0 (0.00%) Active: 1 Started: 1 Finished: 0 
+2016/07/07 15:23:30 INFO  - jmeter.threads.JMeterThread: Thread finished: Server API combination 1-1 
+2016/07/07 15:23:30 INFO  - jmeter.engine.StandardJMeterEngine: Notifying test listeners of end of test 
+2016/07/07 15:23:30 INFO  - jmeter.reporters.Summariser: summary =      9 in     1s =   17.8/s Avg:    53 Min:     5 Max:   384 Err:     0 (0.00%) 

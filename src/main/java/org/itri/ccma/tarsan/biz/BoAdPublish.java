@@ -891,6 +891,7 @@ public class BoAdPublish {
 			Criteria criteria = session.createCriteria(SplashSchedule.class);
 			criteria.add(Restrictions.eq("userId", username));
 			criteria.addOrder(Order.asc("scheduleTime"));
+			criteria.add(Restrictions.eq("del", false));
 			List<SplashSchedule> list = criteria.list();
 			ObjectMapper mapper = new ObjectMapper();
 
