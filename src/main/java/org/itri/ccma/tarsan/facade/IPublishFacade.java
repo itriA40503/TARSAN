@@ -34,4 +34,8 @@ public interface IPublishFacade {
 	public List delSplashSchedule(String sessionId, String username,  String date);
 	
 	public List getScheduleByUsername(String sessionId, String username);
+	
+	public List getMachineByUser(String sessionId, String owner);
+	
+	public List<?> Machinelogin(String sessionId, String account);
 }

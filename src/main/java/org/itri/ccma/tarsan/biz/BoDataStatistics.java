@@ -86,20 +86,23 @@ public class BoDataStatistics {
 						int value = (Integer)dateList.get(month+"-"+day);
 						dateList.put(month+"-"+day,value+1);
 					}
-					
 				}
-				
 			}
-			
+			session.clear();
+			list.remove(0);
+			System.gc();
 			SortedSet<String> keys = new TreeSet<String>(dateList.keySet());
 			for (String key : keys) { 
-			   String value = dateList.get(key).toString();
+//			   String value = dateList.get(key).toString();
 			   String[] tmp = key.toString().split("-");
 				 output.addAll(MessageUtil.getInstance().NewGenerateResponseMessage("Month",tmp[0],"Day",tmp[1],"Count",
 						 dateList.get(key).toString()));
 				 //logger.info(key.toString()+":"+value);
 
 			}
+			dateList = null;
+			keys=null;
+			System.gc();
 //			for(Object key : dateList.keySet()){
 //				 System.out.println(key + " : " + dateList.get(key));
 //				 String[] tmp = key.toString().split("-");
@@ -107,7 +110,11 @@ public class BoDataStatistics {
 //						 dateList.get(key).toString()));
 //			}
 			executionMap.put("days", output);
+			output.remove(0);
+			System.gc();
 			resultList.add(executionMap);
+			executionMap = null;
+			System.gc();
 		}catch(Exception e){
 			if (Configurations.IS_DEBUG) {
 				logger.error("[ERROR] methodName: " + methodName);

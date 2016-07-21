@@ -25,6 +25,7 @@ import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 import org.itri.ccma.tarsan.biz.exceptions.LogicException;
+import org.itri.ccma.tarsan.common.SessionMap;
 import org.itri.ccma.tarsan.hibernate.Budgetlog;
 import org.itri.ccma.tarsan.hibernate.Budgetpool;
 import org.itri.ccma.tarsan.hibernate.Buyad;
@@ -41,6 +42,7 @@ import org.itri.ccma.tarsan.hibernate.Users;
 import org.itri.ccma.tarsan.hibernate.Vacantad;
 import org.itri.ccma.tarsan.util.Configurations;
 import org.itri.ccma.tarsan.util.HibernateUtil;
+import org.itri.ccma.tarsan.util.HttpUtil;
 import org.itri.ccma.tarsan.util.MessageUtil;
 import org.itri.ccma.tarsan.util.SignatureUtil;
 
@@ -598,7 +600,43 @@ public class BoAdPublish {
 		} finally {
 			session.close();
 		}
-
+		return resultList;	
+	}
+	
+	public List getMachineByUser(String sessionId, String owner){
+		ArrayList resultList = new ArrayList();
+		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		try {
+			Transaction tx = session.beginTransaction();
+			Criteria criteria = session.createCriteria(Control.class);
+			if(!owner.equals("itri"))criteria.add(Restrictions.eq("owner", owner));
+			criteria.addOrder(Order.asc("userId"));
+			List<Control> list = criteria.list();
+			List<String> output = new ArrayList();
+			ObjectMapper mapper = new ObjectMapper();
+			for (Control p : list) {
+				String user = mapper.writeValueAsString(p.getUserId());
+				String url = mapper.writeValueAsString(p.getPageUrl());
+				String mac = mapper.writeValueAsString(p.getMacAddr());
+				String time = mapper.writeValueAsString(p.getSessionTime());
+				url = url.replace(",", "@");
+				output.add(user+"@"+url+"@"+mac+"@"+time);
+			}
+			String result = output.toString().replaceAll("\"", "");
+			logger.info(result);
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+					"MachineByUser",result);
+		} catch (Exception e) {
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
+					"0", e.getMessage());
+		} finally {
+			session.close();
+		}
 		return resultList;	
 	}
 	
@@ -608,10 +646,10 @@ public class BoAdPublish {
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
 			Transaction tx = session.beginTransaction();
-			Criteria criteria = session.createCriteria(Users.class);
-			criteria.add(Restrictions.eq("account", username));
-			Users user = (Users) criteria.uniqueResult();
-			String result = user.getLastActiveDateTime().toString();
+			Criteria criteria = session.createCriteria(Control.class);
+			criteria.add(Restrictions.eq("userId", username));
+			Control user = (Control) criteria.uniqueResult();
+			String result = user.getLastActiveTime().toString();
 			logger.info(result);
 			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
 					sessionId,result);
@@ -625,7 +663,60 @@ public class BoAdPublish {
 		} finally {
 			session.close();
 		}
+		return resultList;
+	}
+	
+	public List<?> Machinelogin(String sessionId, String account) {
+		// public JSONObject login(String sessionId, String encryptedText) {
+		ArrayList resultList = new ArrayList();
+		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
 
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Transaction tx = session.beginTransaction();
+
+		account = HttpUtil.getInstance().HTML_Decoding(account);
+
+		try {
+			Date currentDate = new Date();
+
+			Criteria criteria_account = session.createCriteria(Control.class);
+			criteria_account.add(Restrictions.eq("userId", account));
+//			criteria_account.add(Restrictions.eq("deletedFlag", false));
+			Control user = (Control) criteria_account.uniqueResult();
+
+			// password = SignatureUtil.createHash("md5", password);
+			if (user == null)
+				throw new LogicException("This Machine does not exist", Configurations.CODE_NOT_EXIST, "machine Name", account);
+
+			user.setLastActiveTime(currentDate);
+			session.persist(user);
+			//session.update(user);
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+					sessionId, "Machine " + user.getUserId() + " successfully logged in");
+
+			SessionMap.addSession(sessionId, account);
+
+			tx.commit();
+		} catch (LogicException e) {
+			if (Configurations.IS_DEBUG) {
+				logger.debug("[FAILURE] methodName: " + methodName);
+				logger.debug("[FAILURE] message: " + MessageUtil.getInstance().generateResponseMessage(e.getErrorCode(),
+						methodName, null, e.getMessage(), e.getParams()));
+			}
+			tx.rollback();
+			resultList = MessageUtil.getInstance().generateResponseMessage(e.getErrorCode(), methodName, null,
+					e.getMessage(), e.getParams());
+		} catch (Exception e) {
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}
+			tx.rollback();
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
+					"0", e.getMessage());
+		} finally {
+			session.close();
+		}
 		return resultList;
 	}
 	

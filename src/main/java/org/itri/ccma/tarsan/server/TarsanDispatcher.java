@@ -507,6 +507,14 @@ public class TarsanDispatcher {
 		return publishAd.getScheduleByUsername(sessionId, username);
 	}
 	
+	public List getMachineByUser(String sessionId, String owner){
+		return publishAd.getMachineByUser(sessionId, owner);
+	}
+	
+	public List<?> Machinelogin(String sessionId, String account){
+		return publishAd.Machinelogin(sessionId, account);
+	}
+	
 	/*-*************************************************************************************************
 	 *                                             DataStatistics                                       *
 	 ***************************************************************************************************/

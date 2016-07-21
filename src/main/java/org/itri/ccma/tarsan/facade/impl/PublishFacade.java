@@ -105,6 +105,18 @@ public class PublishFacade implements IPublishFacade{
 		// TODO Auto-generated method stub
 		return BoAdPublish.getInstance().getScheduleByUsername(sessionId, username);
 	}
+
+	@Override
+	public List getMachineByUser(String sessionId, String owner) {
+		// TODO Auto-generated method stub
+		return BoAdPublish.getInstance().getMachineByUser(sessionId, owner);
+	}
+
+	@Override
+	public List<?> Machinelogin(String sessionId, String account) {
+		// TODO Auto-generated method stub
+		return BoAdPublish.getInstance().Machinelogin(sessionId, account);
+	}
 	
 	
 }
