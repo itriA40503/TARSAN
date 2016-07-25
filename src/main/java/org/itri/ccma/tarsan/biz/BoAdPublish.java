@@ -497,6 +497,7 @@ public class BoAdPublish {
 		ArrayList resultList = new ArrayList();
 		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
 		Session session = HibernateUtil.getSessionFactory().openSession();
+		Date currentDate = new Date();	
 		try {
 			Transaction tx = session.beginTransaction();
 			Criteria criteria = session.createCriteria(Control.class);
@@ -511,6 +512,7 @@ public class BoAdPublish {
 				newcon.setUserId("tmp");
 				newcon.setPageUrl("http://tarsanad.ddns.net/splash/TempPage.html,false");
 				newcon.setSessionTime("300");
+				newcon.setLastActiveTime(currentDate);
 				session.persist(newcon);
 				tx.commit();
 				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
@@ -620,8 +622,9 @@ public class BoAdPublish {
 				String url = mapper.writeValueAsString(p.getPageUrl());
 				String mac = mapper.writeValueAsString(p.getMacAddr());
 				String time = mapper.writeValueAsString(p.getSessionTime());
+				String lastTime =  mapper.writeValueAsString(p.getLastActiveTime().toString());
 				url = url.replace(",", "@");
-				output.add(user+"@"+url+"@"+mac+"@"+time);
+				output.add(user+"@"+url+"@"+mac+"@"+time+"@"+lastTime);
 			}
 			String result = output.toString().replaceAll("\"", "");
 			logger.info(result);
