@@ -29,6 +29,7 @@ import org.itri.ccma.tarsan.common.SessionMap;
 import org.itri.ccma.tarsan.hibernate.Budgetlog;
 import org.itri.ccma.tarsan.hibernate.Budgetpool;
 import org.itri.ccma.tarsan.hibernate.Buyad;
+import org.itri.ccma.tarsan.hibernate.ConnectLog;
 import org.itri.ccma.tarsan.hibernate.Control;
 import org.itri.ccma.tarsan.hibernate.Logad;
 import org.itri.ccma.tarsan.hibernate.Postad;
@@ -1016,6 +1017,89 @@ public class BoAdPublish {
 						sessionId, "Not found schedules.");
 			}
 			
+		} catch (Exception e) {
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
+					sessionId, e.getMessage());
+		} finally {
+			session.close();
+		}
+		return resultList;
+	}
+	
+	public List getConnectLogByUsername(String sessionId, String username){
+		ArrayList resultList = new ArrayList();
+		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Date currentDate = new Date();
+		try {
+			Transaction tx = session.beginTransaction();			
+			Criteria criteria = session.createCriteria(ConnectLog.class);
+			criteria.add(Restrictions.eq("machine", username));
+			criteria.addOrder(Order.desc("createdate"));
+			List<ConnectLog> list = criteria.list();
+			ObjectMapper mapper = new ObjectMapper();
+			String connectlog = "";
+			for (ConnectLog p : list) {
+				String ip = mapper.writeValueAsString(p.getIp());
+				String time = mapper.writeValueAsString(p.getCreatedate().toString());
+				String type = mapper.writeValueAsString(p.getDeviceType());
+				if(connectlog.equals("")){
+					connectlog = ip+"@"+time+"@"+type;
+				}else{
+					connectlog = connectlog + "," + ip+"@"+time+"@"+type;
+				}				
+			}
+			connectlog = connectlog.replaceAll("\"", "");
+			if(!criteria.list().isEmpty()){
+				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+						sessionId, connectlog );	
+			}else{
+				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
+						sessionId, "Not found log.");
+			}			
+		} catch (Exception e) {
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_EXCEPTION, methodName,
+					sessionId, e.getMessage());
+		} finally {
+			session.close();
+		}
+		return resultList;
+	}
+	
+	public List connectLog(String sessionId, String ip, String type, String os, String browser, String brand, String mac, String ssid, String machine, String url){
+		ArrayList resultList = new ArrayList();
+		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		Date currentDate = new Date();
+		try {
+			Transaction tx = session.beginTransaction();		
+			
+			Criteria criteria = session.createCriteria(ConnectLog.class);
+
+			ConnectLog log = new ConnectLog();
+			log.setIp(ip);
+			log.setDeviceType(type);
+			log.setOs(os);
+			log.setBrand(brand);
+			log.setBrowser(browser);
+			log.setMac(mac);
+			log.setMachine(machine);
+			log.setSsid(ssid);
+			log.setUrl(url);
+			log.setCreatedate(currentDate);
+			session.save(log);
+			tx.commit();
+			
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+					sessionId, "ConnectLog already create.", "CreateTime",  currentDate);
 		} catch (Exception e) {
 			if (Configurations.IS_DEBUG) {
 				logger.error("[ERROR] methodName: " + methodName);

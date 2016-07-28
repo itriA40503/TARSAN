@@ -117,6 +117,20 @@ public class PublishFacade implements IPublishFacade{
 		// TODO Auto-generated method stub
 		return BoAdPublish.getInstance().Machinelogin(sessionId, account);
 	}
+
+	@Override
+	public List connectLog(String sessionId, String ip, String type, String os,
+			String browser, String brand, String mac, String ssid,
+			String machine, String url) {
+		// TODO Auto-generated method stub
+		return BoAdPublish.getInstance().connectLog(sessionId, ip, type, os, browser, brand, mac, ssid, machine, url);
+	}
+
+	@Override
+	public List getConnectLogByUsername(String sessionId, String username) {
+		// TODO Auto-generated method stub
+		return BoAdPublish.getInstance().getConnectLogByUsername(sessionId, username);
+	}
 	
 	
 }

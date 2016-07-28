@@ -49,5 +49,6 @@
   <mapping class="org.itri.ccma.tarsan.hibernate.Denydomain" />
   <mapping class="org.itri.ccma.tarsan.hibernate.Control" />
   <mapping class="org.itri.ccma.tarsan.hibernate.SplashSchedule" />
+  <mapping class="org.itri.ccma.tarsan.hibernate.ConnectLog" />
  </session-factory>
 </hibernate-configuration>

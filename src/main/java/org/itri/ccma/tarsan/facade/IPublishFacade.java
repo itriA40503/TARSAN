@@ -38,4 +38,8 @@ public interface IPublishFacade {
 	public List getMachineByUser(String sessionId, String owner);
 	
 	public List<?> Machinelogin(String sessionId, String account);
+	
+	public List connectLog(String sessionId, String ip, String type, String os, String browser, String brand, String mac, String ssid, String machine, String url);
+	
+	public List getConnectLogByUsername(String sessionId, String username);
 }

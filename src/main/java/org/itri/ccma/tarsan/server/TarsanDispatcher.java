@@ -515,6 +515,14 @@ public class TarsanDispatcher {
 		return publishAd.Machinelogin(sessionId, account);
 	}
 	
+	public List connectLog(String sessionId, String ip, String type, String os, String browser, String brand, String mac, String ssid, String machine, String url){
+		return publishAd.connectLog(sessionId, ip, type, os, browser, brand, mac, ssid, machine, url);
+	}
+	
+	public List getConnectLogByUsername(String sessionId, String username){
+		return publishAd.getConnectLogByUsername(sessionId, username);
+	}
+	
 	/*-*************************************************************************************************
 	 *                                             DataStatistics                                       *
 	 ***************************************************************************************************/

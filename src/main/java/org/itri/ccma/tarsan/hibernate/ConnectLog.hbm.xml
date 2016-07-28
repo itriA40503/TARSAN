@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016/7/27 ?U?? 04:40:34 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="ConnectLog" table="connect_log">
+        <id name="connectLogId" type="long">
+            <column name="connect_log_id" />
+            <generator class="assigned" />
+        </id>
+        <property name="ip" type="string">
+            <column name="ip" length="39" />
+        </property>
+        <property name="deviceType" type="string">
+            <column name="device_type" length="256" />
+        </property>
+        <property name="os" type="string">
+            <column name="os" length="256" />
+        </property>
+        <property name="browser" type="string">
+            <column name="browser" length="256" />
+        </property>
+        <property name="brand" type="string">
+            <column name="brand" length="128" />
+        </property>
+        <property name="mac" type="string">
+            <column name="mac" length="17" />
+        </property>
+        <property name="ssid" type="string">
+            <column name="ssid" length="256" />
+        </property>
+        <property name="machine" type="string">
+            <column name="machine" length="128" />
+        </property>
+        <property name="url" type="string">
+            <column name="url" length="65535" />
+        </property>
+        <property name="createdate" type="timestamp">
+            <column name="createdate" length="29" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
