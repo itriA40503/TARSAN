@@ -729,22 +729,22 @@ public class BoAdPublish {
 		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		try {
-			Transaction tx = session.beginTransaction();
-			Criteria criteria = session.createCriteria(Control.class);
-			criteria.add(Restrictions.eq("userId", username));
-			Control con = (Control) criteria.uniqueResult();
-			
-			if (con == null){
-				throw new LogicException("The Name does not exist", Configurations.CODE_NOT_EXIST, "Name", username);
-			}else{
-				
-				con.setPageUrl(url+",false");
-				session.update(con);
-				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
-						sessionId, username+"'s page already update.","URL",url);
+			String [] users = username.split(",");
+			for(String userid:users){
+				Transaction tx = session.beginTransaction();
+				Criteria criteria = session.createCriteria(Control.class);
+				criteria.add(Restrictions.eq("userId", userid));
+				Control con = (Control) criteria.uniqueResult();				
+				if (con == null){
+					throw new LogicException(userid+" does not exist", Configurations.CODE_NOT_EXIST, "Name", username);
+				}else{					
+					con.setPageUrl(url+",false");
+					session.update(con);					
+				}
+				tx.commit();
 			}
-			tx.commit();
-
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+					sessionId, username+"'s page already update.","URL",url);
 		} catch (Exception e) {
 			if (Configurations.IS_DEBUG) {
 				logger.error("[ERROR] methodName: " + methodName);
@@ -837,40 +837,58 @@ public class BoAdPublish {
 		String methodName = Thread.currentThread().getStackTrace()[1].getMethodName();
 		Session session = HibernateUtil.getSessionFactory().openSession();
 		Date currentDate = new Date();
-		try {
-			Transaction tx = session.beginTransaction();
-			
+		try {						
 			SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd-HH:mm");
 			Date scheduleDate = originalFormat.parse(date.toString());
-			
-			Criteria criteria = session.createCriteria(SplashSchedule.class);
-			criteria.add(Restrictions.eq("del", false));
-			criteria.add(Restrictions.eq("scheduleTime", scheduleDate));
-			criteria.add(Restrictions.eq("userId", username));
-			if(criteria.uniqueResult()!=null){
-				SplashSchedule schedule = (SplashSchedule)criteria.uniqueResult();
-				schedule.setScheduleTime(scheduleDate);
-				schedule.setPageUrl(url);
-				schedule.setUpdateTime(currentDate);
-				session.update(schedule);
-				tx.commit();
-				
+			String createInfo="";
+			String updateInfo="";
+			String [] users = username.split(",");
+			for(String userid:users){
+				Transaction tx = session.beginTransaction();
+				Criteria criteria = session.createCriteria(SplashSchedule.class);
+				criteria.add(Restrictions.eq("del", false));
+				criteria.add(Restrictions.eq("scheduleTime", scheduleDate));
+				criteria.add(Restrictions.eq("userId", userid));
+				if(criteria.uniqueResult()!=null){					
+					SplashSchedule schedule = (SplashSchedule)criteria.uniqueResult();
+					schedule.setScheduleTime(scheduleDate);
+					schedule.setPageUrl(url);
+					schedule.setUpdateTime(currentDate);
+					session.update(schedule);
+					tx.commit();					
+//					resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,sessionId, username+"'s Schedule already update.","Schedule Time",date, "UpdateTime",  currentDate);
+					if(updateInfo.equals("")){
+						updateInfo = userid;
+					}else{
+						updateInfo = updateInfo + "," + userid;
+					}
+				}else{
+					SplashSchedule schedule = new SplashSchedule();
+					schedule.setScheduleTime(scheduleDate);
+					schedule.setPageUrl(url);
+					schedule.setDel(false);
+					schedule.setUserId(userid);
+					schedule.setCreateTime(currentDate);
+					schedule.setUpdateTime(currentDate);
+					session.save(schedule);
+					tx.commit();
+//					resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,sessionId, username+"'s Schedule already create.","Schedule Time",date, "CreateTime",  currentDate);
+					if(createInfo.equals("")){
+						createInfo = userid;
+					}else{
+						createInfo = createInfo + "," + userid;
+					}
+				}
+			}		
+			if(createInfo.equals("")){
 				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
-						sessionId, username+"'s Schedule already update.","Schedule Time",date, "UpdateTime",  currentDate);
-				
+						sessionId, updateInfo+"'s Schedule already update.","Schedule Time",date, "UpdateTime",  currentDate);
+			}else if(updateInfo.equals("")){
+				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+						sessionId, createInfo+"'s Schedule already create.","Schedule Time",date, "CreateTime",  currentDate);
 			}else{
-				SplashSchedule schedule = new SplashSchedule();
-				schedule.setScheduleTime(scheduleDate);
-				schedule.setPageUrl(url);
-				schedule.setDel(false);
-				schedule.setUserId(username);
-				schedule.setCreateTime(currentDate);
-				schedule.setUpdateTime(currentDate);
-				session.save(schedule);
-				tx.commit();
-				
 				resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
-						sessionId, username+"'s Schedule already create.","Schedule Time",date, "CreateTime",  currentDate);
+						sessionId, createInfo+"'s Schedule already create.","Schedule Time",date, "CreateTime",  currentDate,updateInfo+"'s Schedule already update.","Schedule Time",date, "UpdateTime",  currentDate);
 			}			
 		} catch (Exception e) {
 			if (Configurations.IS_DEBUG) {
