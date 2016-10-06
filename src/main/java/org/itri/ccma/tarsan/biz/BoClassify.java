@@ -67,35 +67,35 @@ public class BoClassify {
 			return  MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_ERROR, methodName,
 					sessionId, "IP ERROR");
 		}
-
+//		logger.error(InputValidator.validator("ipv4", ip));
 		try{
-			SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd");
-			Calendar cal = Calendar.getInstance();
-			Date current = new Date();			
-			cal.add(Calendar.DAY_OF_YEAR, 1);
-			Date date1 = originalFormat.parse(originalFormat.format(current));
-			Date date2 = cal.getTime();
-			Criteria criteria = session.createCriteria(Userevent.class);
-			criteria.addOrder(Order.desc("urlPath"));			
-			//# get ip
-			criteria.add(Restrictions.eq("ip", ip));
-			//# get today data
-			criteria.add(Restrictions.ge("createdDateTime", date1));
-			criteria.add(Restrictions.lt("createdDateTime", date2));
-			logger.info(date1+"==="+date2);
-//			criteria.setMaxResults(20000);
-			List<Userevent> list = criteria.list();
-			List<String> output = new ArrayList();
-			ObjectMapper mapper = new ObjectMapper();
-			Map executionMap = new LinkedHashMap();
-			HashMap dateList = new HashMap();
+//			SimpleDateFormat originalFormat = new SimpleDateFormat("yyyy-MM-dd");
+//			Calendar cal = Calendar.getInstance();
+//			Date current = new Date();			
+//			cal.add(Calendar.DAY_OF_YEAR, 1);
+//			Date date1 = originalFormat.parse(originalFormat.format(current));
+//			Date date2 = cal.getTime();
+//			Criteria criteria = session.createCriteria(Userevent.class);
+//			criteria.addOrder(Order.desc("urlPath"));			
+//			//# get ip
+//			criteria.add(Restrictions.eq("ip", ip));
+//			//# get today data
+//			criteria.add(Restrictions.ge("createdDateTime", date1));
+//			criteria.add(Restrictions.lt("createdDateTime", date2));
+//			logger.info(date1+"==="+date2);
+////			criteria.setMaxResults(20000);
+//			List<Userevent> list = criteria.list();
+//			List<String> output = new ArrayList();
+//			ObjectMapper mapper = new ObjectMapper();
+//			Map executionMap = new LinkedHashMap();
+//			HashMap dateList = new HashMap();
+//			
+//			if(list.size()==0){
+//				return resultList =  MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+//						sessionId, "no data");
+//			} 
 			
-			if(list.size()==0){
-				return resultList =  MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
-						sessionId, "no data");
-			} 
-			
-			logger.info(list.size());
+//			logger.info(list.size());
 //			ArrayList<String> kwList = new ArrayList();
 //			ArrayList<String> shops = getShopList();
 //			String kw ="";
@@ -126,31 +126,30 @@ public class BoClassify {
 //			}
 //			executionMap.put("IP", output);
 //			resultList.add(executionMap);
-//			//# testing & random
-//			ArrayList<String> types = new ArrayList();
-//			types.add("food");
-//			types.add("clothing");
-//			types.add("housing");
-//			types.add("transportation");
-//			types.add("education");
-//			types.add("entertainment");
-//			Random randomGenerator = new Random();
-//			int rand = (int)(Math.random()*6);
-//			Collections.shuffle(types);
-//			String randTypes="";
-//			logger.info("rand:"+rand);
-//			if(rand == 0)return resultList =  MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
-//					sessionId, "No Data");
-//				
-//			for(int i = 0; i < rand; i++){
-//				if(i==0){
-//					randTypes = types.get(i);
-//				}else{
-//					randTypes = randTypes + "," +types.get(i);	
-//				}				
-//			}
+			ArrayList<String> types = new ArrayList();
+			types.add("food");
+			types.add("clothing");
+			types.add("housing");
+			types.add("transportation");
+			types.add("education");
+			types.add("entertainment");
+			Random randomGenerator = new Random();
+			int rand = (int)(Math.random()*6);
+			Collections.shuffle(types);
+			String randTypes="";
+			logger.info("rand:"+rand);
+			if(rand == 0)return resultList =  MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+					sessionId, "No Data");
+				
+			for(int i = 0; i < rand; i++){
+				if(i==0){
+					randTypes = types.get(i);
+				}else{
+					randTypes = randTypes + "," +types.get(i);	
+				}				
+			}
 			resultList =  MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
-					sessionId, "food,clothing,housing,transportation,education,entertainment");
+					sessionId, randTypes);
 			
 		}catch(Exception e){
 			if (Configurations.IS_DEBUG) {
