@@ -1129,6 +1129,5 @@ public class BoAdPublish {
 			session.close();
 		}
 		return resultList;
-	}
-	
+	}	
 }

@@ -10,6 +10,7 @@ import org.itri.ccma.tarsan.biz.BoTest;
 import org.itri.ccma.tarsan.biz.BoUser;
 import org.itri.ccma.tarsan.facade.IAdExchange;
 import org.itri.ccma.tarsan.facade.IAdsFacade;
+import org.itri.ccma.tarsan.facade.IClassify;
 import org.itri.ccma.tarsan.facade.IDataStatistics;
 import org.itri.ccma.tarsan.facade.IPatternFacade;
 import org.itri.ccma.tarsan.facade.IPublishFacade;
@@ -53,6 +54,9 @@ public class TarsanDispatcher {
 	
 	/** DataStatistics Object */
 	private IDataStatistics dataStatistic;
+	
+	/** Classify Object */
+	private IClassify classify;
 
 	/**
 	 * Instantiates a new u bike dispatcher.
@@ -80,6 +84,9 @@ public class TarsanDispatcher {
 			
 			clz = Class.forName("org.itri.ccma.tarsan.facade.impl.DataStatisticsFacade");
 			dataStatistic = (IDataStatistics) clz.newInstance();
+			
+			clz = Class.forName("org.itri.ccma.tarsan.facade.impl.ClassifyFacade");
+			classify = (IClassify) clz.newInstance();
 			
 		} catch (Throwable t) {
 			t.printStackTrace();
@@ -565,4 +572,12 @@ public class TarsanDispatcher {
 	public List<?>getDailyHoursDataByHost(String sessionId, String host){
 		return dataStatistic.getDailyHoursDataByHost(sessionId, host);
 	}
+	
+	/*-*************************************************************************************************
+	 *                                             Classify                                            *
+	 ***************************************************************************************************/
+	public List<?> getCategory(String sessionId, String ip){
+		return classify.getCategory(sessionId, ip);
+	}
+	
 }

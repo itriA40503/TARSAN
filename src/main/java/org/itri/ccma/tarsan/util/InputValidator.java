@@ -18,6 +18,8 @@ public class InputValidator {
 			
 			if (type.equals("email"))
 				regex = "^(.+)@(.+)$";
+			else if(type.equals("ipv4"))
+				regex = "(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)";
 			else if (type.equals("phone"))
 				regex ="^\\(?([0-9]{4})\\)?[-.\\s]?([0-9]{3})[-.\\s]?([0-9]{3})$";
 			else if (type.equals("password"))
