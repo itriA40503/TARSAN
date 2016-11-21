@@ -20,6 +20,7 @@ import java.util.List;
 
 import java.util.Map;
 import java.util.Random;
+import java.util.TreeMap;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -56,7 +57,106 @@ public class BoClassify {
 
 		private static final BoClassify INSTANCE = new BoClassify();
 	}
+	@SuppressWarnings("unchecked")
+	public List<?>getCategory(String sessionId, String ip){
+		String methodName = Thread.currentThread().getStackTrace()[1]
+				.getMethodName();
+		ArrayList resultList = new ArrayList();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		if(!InputValidator.validator("ipv4", ip)){
+			return  MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_ERROR, methodName,
+					sessionId, "IP ERROR");
+		}
+
+		try{
+			//# testing & random
+			ArrayList<String> types = new ArrayList();
+			types.add("0");
+			types.add("1");
+			types.add("2");
+			types.add("3");
+			types.add("4");
+			types.add("5");
+			Random randomGenerator = new Random();
+			int rand = (int)(Math.random()*6);
+			Collections.shuffle(types);
+			String randTypes="";
+			logger.info("rand:"+rand);
+			if(rand == 0)return resultList =  MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+					sessionId, "");
+			ArrayList<String> sort = new ArrayList();
+			for(int i = 0; i < rand; i++){
+				sort.add(types.get(i));	
+			}
+			List<String> subList = sort.subList(0, sort.size());
+			Collections.sort(subList);
+			for(int i = 0; i < subList.size(); i++){
+				if(i == 0){
+					randTypes = subList.get(i);
+				}else{
+					randTypes = randTypes + "," + subList.get(i);
+				}
+			}
+			resultList =  MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+					sessionId, randTypes);
+			
+		}catch(Exception e){
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}
+		}finally{
+			session.close();
+		}
+		return resultList;
+	}
 	
+	@SuppressWarnings("unchecked")
+	public List<?>getDomainsFromIp(String sessionId, String ip){
+		String methodName = Thread.currentThread().getStackTrace()[1]
+				.getMethodName();
+		ArrayList resultList = new ArrayList();
+		Session session = HibernateUtil.getSessionFactory().openSession();
+		if(!InputValidator.validator("ipv4", ip)){
+			return  MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_ERROR, methodName,
+					sessionId, "IP ERROR");
+		}
+
+		try{
+			Criteria criteria = session.createCriteria(Userevent.class);
+			criteria.addOrder(Order.desc("usereventId"));
+			criteria.add(Restrictions.eq("ip", ip));
+			criteria.setMaxResults(50);
+//			criteria.add(Restrictions.lt("createdDateTime", date2));
+			List<Userevent> list = criteria.list();
+			List<String> output = new ArrayList();
+			Map executionMap = new LinkedHashMap();
+			ObjectMapper mapper = new ObjectMapper();
+			List<String> hostList = new ArrayList();
+			for (Userevent p : list) {
+				String host = mapper.writeValueAsString(p.getUrlHost());
+				host = host.replace("\"", "");
+				if(!hostList.contains(host)){
+					hostList.add(host);
+				}
+			}
+			resultList = MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
+					sessionId, ip);
+			resultList.add(hostList);
+			
+			
+		}catch(Exception e){
+			if (Configurations.IS_DEBUG) {
+				logger.error("[ERROR] methodName: " + methodName);
+				logger.error("[ERROR] message: " + e.getMessage(), e);
+			}
+		}finally{
+			session.close();
+		}
+		return resultList;
+	}
+	
+	/*
 	@SuppressWarnings("unchecked")
 	public List<?>getCategory(String sessionId, String ip){
 		String methodName = Thread.currentThread().getStackTrace()[1]
@@ -126,29 +226,7 @@ public class BoClassify {
 //			}
 //			executionMap.put("IP", output);
 //			resultList.add(executionMap);
-//			//# testing & random
-//			ArrayList<String> types = new ArrayList();
-//			types.add("food");
-//			types.add("clothing");
-//			types.add("housing");
-//			types.add("transportation");
-//			types.add("education");
-//			types.add("entertainment");
-//			Random randomGenerator = new Random();
-//			int rand = (int)(Math.random()*6);
-//			Collections.shuffle(types);
-//			String randTypes="";
-//			logger.info("rand:"+rand);
-//			if(rand == 0)return resultList =  MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
-//					sessionId, "No Data");
-//				
-//			for(int i = 0; i < rand; i++){
-//				if(i==0){
-//					randTypes = types.get(i);
-//				}else{
-//					randTypes = randTypes + "," +types.get(i);	
-//				}				
-//			}
+
 			resultList =  MessageUtil.getInstance().generateResponseMessage(Configurations.CODE_OK, methodName,
 					sessionId, "food,clothing,housing,transportation,education,entertainment");
 			
@@ -162,6 +240,7 @@ public class BoClassify {
 		}
 		return resultList;
 	}
+	*/
 	
 	private String matchKeyword(String url){
 		String regex ="\\?q=(.*?)[#&]|\\?q=(.*)|nkw=(.*?)&|term=(.*)|query=(.*?)[\\W]|keywords=(.*?)&|keywords=(.*)|&k=(.*?)&|Keyword=(.*?)[&]|keyword=(.*?)[\\W]|\\?p=(.*?)&|&q=(.*?)&|\\?key=(.*?)&|&k=(.*)|\\?q=(.*?)&|Keyword=(.*)|c_name=(.*?)[\\W]|search=(.*)|rakuten.com.tw\\/search\\/(.*?)\\/|searchword=(.*)|st=(.*?)&_|&origkw=(.*?)&|[\\?]Ntt=(.*)|[\\W]Ntt=(.*?)[#&]|keyword%5B%5D=(.*?)&";

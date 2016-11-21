@@ -39,6 +39,26 @@
     </attributes>
   </classpathentry>
   <classpathentry kind="var" path="M2_REPO/postgresql/pljava-public/1.0.0b4/pljava-public-1.0.0b4.jar"/>
+  <classpathentry kind="var" path="M2_REPO/com/google/code/gson/gson/2.8.0/gson-2.8.0.jar" sourcepath="M2_REPO/com/google/code/gson/gson/2.8.0/gson-2.8.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/A40503/.m2/repository/com/google/code/gson/gson/2.8.0/gson-2.8.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/com/squareup/retrofit2/retrofit/2.1.0/retrofit-2.1.0.jar" sourcepath="M2_REPO/com/squareup/retrofit2/retrofit/2.1.0/retrofit-2.1.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/A40503/.m2/repository/com/squareup/retrofit2/retrofit/2.1.0/retrofit-2.1.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/com/squareup/okhttp3/okhttp/3.3.0/okhttp-3.3.0.jar" sourcepath="M2_REPO/com/squareup/okhttp3/okhttp/3.3.0/okhttp-3.3.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/A40503/.m2/repository/com/squareup/okhttp3/okhttp/3.3.0/okhttp-3.3.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
+  <classpathentry kind="var" path="M2_REPO/com/squareup/okio/okio/1.8.0/okio-1.8.0.jar" sourcepath="M2_REPO/com/squareup/okio/okio/1.8.0/okio-1.8.0-sources.jar">
+    <attributes>
+      <attribute value="jar:file:/C:/Users/A40503/.m2/repository/com/squareup/okio/okio/1.8.0/okio-1.8.0-javadoc.jar!/" name="javadoc_location"/>
+    </attributes>
+  </classpathentry>
   <classpathentry kind="var" path="M2_REPO/com/sun/jersey/jersey-server/1.0.1/jersey-server-1.0.1.jar" sourcepath="M2_REPO/com/sun/jersey/jersey-server/1.0.1/jersey-server-1.0.1-sources.jar">
     <attributes>
       <attribute value="jar:file:/C:/Users/A40503/.m2/repository/com/sun/jersey/jersey-server/1.0.1/jersey-server-1.0.1-javadoc.jar!/" name="javadoc_location"/>

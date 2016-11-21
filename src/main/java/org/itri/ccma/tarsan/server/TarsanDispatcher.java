@@ -6,6 +6,7 @@ import java.util.List;
 import javassist.compiler.ast.Keyword;
 
 import org.apache.log4j.Logger;
+import org.itri.ccma.tarsan.biz.BoClassify;
 import org.itri.ccma.tarsan.biz.BoTest;
 import org.itri.ccma.tarsan.biz.BoUser;
 import org.itri.ccma.tarsan.facade.IAdExchange;
@@ -578,6 +579,11 @@ public class TarsanDispatcher {
 	 ***************************************************************************************************/
 	public List<?> getCategory(String sessionId, String ip){
 		return classify.getCategory(sessionId, ip);
+	}
+	
+	public List<?> getDomainsFromIp(String sessionId, String ip) {
+		// TODO Auto-generated method stub
+		return classify.getDomainsFromIp(sessionId, ip);
 	}
 	
 }

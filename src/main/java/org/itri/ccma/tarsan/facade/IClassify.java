@@ -10,4 +10,6 @@ public interface IClassify {
 	 * @return
 	 */
 	public List<?> getCategory(String sessionId, String ip);
+	
+	public List<?>getDomainsFromIp(String sessionId, String ip);
 }

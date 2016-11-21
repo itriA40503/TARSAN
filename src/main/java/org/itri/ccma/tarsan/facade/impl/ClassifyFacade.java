@@ -13,4 +13,10 @@ public class ClassifyFacade implements IClassify {
 		return BoClassify.getInstance().getCategory(sessionId, ip);
 	}
 
+	@Override
+	public List<?> getDomainsFromIp(String sessionId, String ip) {
+		// TODO Auto-generated method stub
+		return BoClassify.getInstance().getDomainsFromIp(sessionId, ip);
+	}
+
 }
